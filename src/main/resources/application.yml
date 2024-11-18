@@ -1,0 +1,6 @@
+picpay:
+  service.name: spring-kafka-proxy-nodered
+  swagger:
+    title: API to send messages by kafka and integrate with nodered
+    description: API to send messsages by kafka, read them by proxy and integrate with nodered.
+    version: 1.0.0

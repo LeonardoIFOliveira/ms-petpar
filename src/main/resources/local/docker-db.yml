@@ -1,0 +1,29 @@
+# Primeiro passo
+  # * colocar o jar: mysql-connector-j-8.0.31.jar na pasta: apache-tomcat-9.0.93\lib
+  # * colocar o: /META_INF.context.xml na pasta: apache-tomcat-9.0.93\conf
+#Segundo passo
+# Ter o Docker e a ferramenta de administração de banco da sua escolha
+#  * comando : docker compose -f docker-db.yml up
+#  * abrir o bash:  docker exec -it PetPar bash
+#  * abrir o mysql: mysql -u root -p
+#  * criar base: CREATE DATABASE MYSQLTESTE;
+#  * resetar usuarios: update mysql.user set host='%' where user='root';
+# FLUSH PRIVILEGES;
+# Referencia: https://medium.com/@alan-vieira/rodando-mysql-no-docker-e6e05b727196
+# https://www.youtube.com/watch?v=sXtfWahVEvk
+version: '3.8'
+services:
+  db:
+    image: mysql/mysql-server:latest
+    container_name: PetPar
+    restart: always
+    environment:
+      - MYSQL_DATABASE=PetPar
+      - MYSQL_ROOT_PASSWORD=root
+    ports:
+      - '3306:3306'
+    volumes:
+      - mysql-volume:/var/lib/mysql
+volumes:
+  mysql-volume:
+    driver: local
