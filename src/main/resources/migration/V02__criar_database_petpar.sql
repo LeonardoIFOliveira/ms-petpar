@@ -14,6 +14,7 @@ CREATE TABLE users (
     cpf VARCHAR(14) UNIQUE,
     phone_number VARCHAR(20),
     gender ENUM('MASCULINO', 'FEMININO', 'OUTRO', 'PREFIRO_NAO_DIZER'),
+    updated_at TIMESTAMP NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -26,7 +27,9 @@ CREATE TABLE institutions (
     cpf_or_cnpj VARCHAR(18) UNIQUE,
     phone_number VARCHAR(20),
     password VARCHAR(255) NOT NULL,
+    updated_at TIMESTAMP NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+
 );
 
 CREATE TABLE animals (
@@ -37,8 +40,8 @@ CREATE TABLE animals (
     birth_date DATE,
     type ENUM('CACHORRO', 'GATO', 'ROEDOR', 'PEIXE', 'OUTRO') NOT NULL,
     status_adoption ENUM('IN_PROGRESS', 'PENDING', 'DONE') DEFAULT 'PENDING',
-    posted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    adopted_at TIMESTAMP NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NULL,
     user_id BIGINT,
     institution_id BIGINT,
     FOREIGN KEY (user_id) REFERENCES users(id),
@@ -50,7 +53,7 @@ CREATE TABLE donations (
     id BIGINT PRIMARY KEY AUTO_INCREMENT,
     amount DECIMAL(10, 2) NOT NULL,
     paymentMethod ENUM('CARTAO', 'PIX'),
-    data DATE NOT NULL,
+    created_at DATE NOT NULL,
     institution_id BIGINT NOT NULL,
     user_id BIGINT NOT NULL,
     FOREIGN KEY (institution_id) REFERENCES institutions(id),

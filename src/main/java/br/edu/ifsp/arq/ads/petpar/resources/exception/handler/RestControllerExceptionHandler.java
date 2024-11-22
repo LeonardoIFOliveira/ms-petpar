@@ -23,7 +23,6 @@ import static org.springframework.http.HttpStatus.*;
 @RestControllerAdvice
 public class RestControllerExceptionHandler extends ResponseEntityExceptionHandler {
 
-    private static final String INVALID_VALUE_FIELD_MESSAGE = "fields with invalid values";
 
     @ResponseBody
     @ExceptionHandler(value = {NotFoundException.class})
@@ -43,38 +42,26 @@ public class RestControllerExceptionHandler extends ResponseEntityExceptionHandl
         return new ResponseEntity<>(apiError, new HttpHeaders(), apiError.getStatus());
     }
 
-    @Override
-    protected ResponseEntity<Object> handleNoHandlerFoundException(
-            NoHandlerFoundException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
-        String error = "No handler found for " + ex.getHttpMethod() + " " + ex.getRequestURL();
-
-        ApiError apiError = new ApiError(HttpStatus.NOT_FOUND, ex.getLocalizedMessage(), error);
-        return new ResponseEntity<>(apiError, new HttpHeaders(), apiError.getStatus());
-    }
-
-    @Override
-    protected ResponseEntity<Object> handleMethodArgumentNotValid(
-            MethodArgumentNotValidException ex,
-            HttpHeaders headers,
-            HttpStatus status,
-            WebRequest request) {
-
-        List<String> errors = new ArrayList<>();
-
-        for (FieldError error : ex.getBindingResult().getFieldErrors()) {
-            errors.add(toSnakeCase(error.getField()) + " " + error.getDefaultMessage());
-        }
-
-        ApiError apiError = new ApiError(
-            UNPROCESSABLE_ENTITY,
-            INVALID_VALUE_FIELD_MESSAGE,
-            errors
-        );
-
-        return handleExceptionInternal(ex, apiError, headers, apiError.getStatus(), request);
-    }
-
-    private String toSnakeCase(String camelCaseValue) {
-        return CaseFormat.UPPER_CAMEL.to(CaseFormat.LOWER_UNDERSCORE, camelCaseValue);
-    }
+//
+//    @Override
+//    protected ResponseEntity<Object> handleMethodArgumentNotValid(
+//            MethodArgumentNotValidException ex,
+//            HttpHeaders headers,
+//            HttpStatus status,
+//            WebRequest request) {
+//
+//        List<String> errors = new ArrayList<>();
+//
+//        for (FieldError error : ex.getBindingResult().getFieldErrors()) {
+//            errors.add(toSnakeCase(error.getField()) + " " + error.getDefaultMessage());
+//        }
+//
+//        ApiError apiError = new ApiError(
+//            UNPROCESSABLE_ENTITY,
+//            INVALID_VALUE_FIELD_MESSAGE,
+//            errors
+//        );
+//
+//        return handleExceptionInternal(ex, apiError, headers, apiError.getStatus(), request);
+//    }
 }

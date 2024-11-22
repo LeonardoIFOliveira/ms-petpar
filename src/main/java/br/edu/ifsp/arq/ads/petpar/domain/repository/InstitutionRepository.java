@@ -9,9 +9,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 import java.util.Optional;
 
-public interface InstitutionRepository extends JpaRepository<InstitutionEntity, String> {
+public interface InstitutionRepository extends JpaRepository<InstitutionEntity, Long> {
 
     List<InstitutionEntity> findOrderByCreatedAtAsc(Pageable pageable);
 
     Optional<InstitutionEntity> findByNameAndPassword(String name, String password);
+    Optional<InstitutionEntity> findByEmailOrCpfOrCnpj(String name, String cpfOrCnpj);
+
+    Optional<InstitutionEntity> findByEmail(String email);
 }

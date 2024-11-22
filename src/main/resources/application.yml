@@ -1,6 +1,18 @@
-picpay:
-  service.name: spring-kafka-proxy-nodered
-  swagger:
-    title: API to send messages by kafka and integrate with nodered
-    description: API to send messsages by kafka, read them by proxy and integrate with nodered.
-    version: 1.0.0
+service.name: PetPar
+swagger:
+  title: API para o web site de adoção de animais Petpar
+  description: Essa API tem como objetivo disponibilizar todo a funcionalidade do site envolvendo usuarios, instituições, animais e doações
+  version: 1.0.0
+request-queue:
+  period: "0 0 * * 0"
+  requests-amount: 10
+  scheduler-enabled: true
+spring:
+  application:
+      name:
+  jpa:
+    database: MYSQL
+  datasource:
+    url: "jdbc:mysql://localhost:3306/PetPar?createDatabaseIfNotExist=true&useSSL=false&useTimezone=true&serverTimezone=UTC"
+    password: "root"
+    username: "root"

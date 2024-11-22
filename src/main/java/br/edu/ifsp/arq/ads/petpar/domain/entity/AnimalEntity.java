@@ -3,16 +3,14 @@ package br.edu.ifsp.arq.ads.petpar.domain.entity;
 import br.edu.ifsp.arq.ads.petpar.domain.entity.enums.Gender;
 import br.edu.ifsp.arq.ads.petpar.domain.entity.enums.SpecieType;
 import br.edu.ifsp.arq.ads.petpar.domain.entity.enums.StatusAdoption;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
-@Entity
+@Entity(name ="s")
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -28,9 +26,11 @@ public class AnimalEntity {
     private LocalDate birthDate;
     private SpecieType type;
     private StatusAdoption statusAdoption;
-    private LocalDate postedAt;
-    private LocalDate adoptedAt;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
+    @OneToOne
     private UserEntity userEntity;
+    @OneToOne
     private InstitutionEntity institution;
 
 }

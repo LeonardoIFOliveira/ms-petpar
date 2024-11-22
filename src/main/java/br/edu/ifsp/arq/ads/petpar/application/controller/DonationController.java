@@ -1,11 +1,16 @@
 package br.edu.ifsp.arq.ads.petpar.application.controller;
 
-import io.swagger.annotations.ApiOperation;
+import br.edu.ifsp.arq.ads.petpar.application.dto.DonationDto;
+import br.edu.ifsp.arq.ads.petpar.domain.service.DonationService;
+import br.edu.ifsp.arq.ads.petpar.resources.mapper.DonationMapper;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Slf4j
 @RestController
@@ -14,32 +19,35 @@ import org.springframework.web.bind.annotation.*;
 public class DonationController {
 
     @Autowired
-    private AdoptionService sendMessageService;
-    //TODO list
+    private DonationService donationService;
+    @Autowired
+    private DonationMapper mapper;
 
 
-    @ApiOperation(value = "Send Message to someone, they will be send asynchronously")
+    @Operation(description = "Efetua doação")
     @PostMapping
-    public ResponseEntity sendMessage(AdoptionPostRequest request) throws Exception {
-
-        sendMessageService.send(request);
+    public ResponseEntity save(DonationDto donationDto) throws Exception {
+        donationService.save(mapper.toEntity(donationDto));
         return ResponseEntity.noContent().build();
     }
 
-    @ApiOperation(value = "Send Message to someone, they will be send asynchronously")
-    @GetMapping
-    public ResponseEntity sendMessage(String id) throws Exception {
 
-        sendMessageService.send(request);
-        return ResponseEntity.noContent().build();
+    @Operation(description = "Lista Animais por status")
+    @GetMapping("/list-user")
+    public ResponseEntity<List<DonationDto>> listUser(String userId) throws Exception {
+        var response = mapper.toDataTransferObjectList(
+                donationService.listOfUser(userId));
+
+        return ResponseEntity.ok(response);
     }
 
-    @ApiOperation(value = "Send Message to someone, they will be send asynchronously")
-    @PutMapping
-    public AdoptionPutRequest sendMessage(AdoptionPutRequest request) throws Exception {
+    @Operation(description = "Lista Animais por status")
+    @GetMapping("/list-institution")
+    public ResponseEntity<List<DonationDto>> listInstituition(String institutionId) throws Exception {
+        var response = mapper.toDataTransferObjectList(
+                donationService.listOfInstitution(institutionId));
 
-        sendMessageService.send(request);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok(response);
     }
 
 }

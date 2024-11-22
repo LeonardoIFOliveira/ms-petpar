@@ -8,10 +8,14 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface AnimalRepository extends JpaRepository<AnimalEntity, String> {
+public interface AnimalRepository extends JpaRepository<AnimalEntity, Long> {
 
     List<AnimalEntity> findOrderByCreatedAtAsc(Pageable pageable);
 
     List<AnimalEntity> findByStatusOrderByCreatedAtAsc(StatusAdoption status, Pageable pageable);
 
+
+    List<AnimalEntity> findByInstitutionIdOrderByCreatedAtAsc(String institutionId,Pageable pageable);
+
+    List<AnimalEntity> findByInStatusOrderByCreatedAtDesc(List<StatusAdoption> statusAdoptions, Pageable pageable);
 }

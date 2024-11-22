@@ -2,12 +2,14 @@ package br.edu.ifsp.arq.ads.petpar.domain.entity;
 
 
 import br.edu.ifsp.arq.ads.petpar.domain.entity.enums.PaymentMethod;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
-@Entity
+@Entity(name ="donations")
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -19,8 +21,10 @@ public class DonationEntity{
 	private Long id;
 	private Double amount;
 	private PaymentMethod paymentMethod;
-	private LocalDate data;
+	private LocalDateTime createdAt;
+	@OneToOne
 	private InstitutionEntity institution;
+	@OneToOne
 	private UserEntity userEntity;
 
 }

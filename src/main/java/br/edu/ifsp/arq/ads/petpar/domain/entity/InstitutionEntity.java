@@ -1,13 +1,16 @@
 package br.edu.ifsp.arq.ads.petpar.domain.entity;
 
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 
 @Data
-@Entity
+@Entity(name ="institutions")
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -23,6 +26,11 @@ public class InstitutionEntity {
     private String cpfOrCnpj;
     private String phoneNumber;
     private String password;
-    private LocalDate createdAt;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
+    @ManyToMany(fetch = FetchType.EAGER) // fetch = buscar - eager = ancioso
+    @JoinTable(name = "user_permission", joinColumns = @JoinColumn(name = "id_user"),
+            inverseJoinColumns = @JoinColumn(name = "id_permission"))
+    private List<Permission> permissions;
 
 }

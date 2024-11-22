@@ -1,6 +1,9 @@
 package br.edu.ifsp.arq.ads.petpar.application.controller;
 
-import io.swagger.annotations.ApiOperation;
+import br.edu.ifsp.arq.ads.petpar.application.dto.UserDto;
+import br.edu.ifsp.arq.ads.petpar.domain.service.UserService;
+import br.edu.ifsp.arq.ads.petpar.resources.mapper.UserMapper;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,30 +17,41 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
 
     @Autowired
-    private AdoptionService sendMessageService;
+    private UserService userService;
+
+    @Autowired
+    private UserMapper mapper;
+
+    //TODO
+    //@PreAuthorize("hasAuthority('ROLE_SEARCH_USER') and hasAuthority('SCOPE_read')")
+    @Operation(description = "Loga usuário")
+    @GetMapping("/login")
+    public ResponseEntity listByInstitutionId(String email, String senha) throws Exception {
+        userService.login(email,senha);
+        return ResponseEntity.noContent().build();
+    }
 
 
-    @ApiOperation(value = "Send Message to someone, they will be send asynchronously")
+    @Operation(description="Salva usuário na base de dados")
     @PostMapping
-    public ResponseEntity sendMessage(AdoptionPostRequest request) throws Exception {
+    public ResponseEntity save(UserDto request) throws Exception {
 
-        sendMessageService.send(request);
+        userService.save(mapper.toEntity(request));
         return ResponseEntity.noContent().build();
     }
 
-    @ApiOperation(value = "Send Message to someone, they will be send asynchronously")
-    @GetMapping
-    public ResponseEntity sendMessage(String id) throws Exception {
+    @Operation(description = "Seleciona usuário por id")
+    @GetMapping("/{id}")
+    public ResponseEntity<UserDto> findById(Long id) throws Exception {
+        var response = mapper.toDataTransferObject(userService.findOrThrowNotFound(id));
 
-        sendMessageService.send(request);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok(response);
     }
 
-    @ApiOperation(value = "Send Message to someone, they will be send asynchronously")
+    @Operation(description = "Deleta usuário na base de dados")
     @PutMapping
-    public AdoptionPutRequest sendMessage(AdoptionPutRequest request) throws Exception {
-
-        sendMessageService.send(request);
+    public ResponseEntity delete(Long id) throws Exception {
+        userService.delete(id);
         return ResponseEntity.noContent().build();
     }
 

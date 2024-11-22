@@ -14,8 +14,7 @@
 	<name>spring-kafka-nodered</name>
 	<description>Project to read and send a message by kafka using proxy and integrate with nodered</description>
 	<properties>
-		<java.version>11</java.version>
-		<spring-cloud.version>2021.0.4</spring-cloud.version>
+		<java.version>17</java.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -27,6 +26,11 @@
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-ui</artifactId>
+			<version>1.6.6</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

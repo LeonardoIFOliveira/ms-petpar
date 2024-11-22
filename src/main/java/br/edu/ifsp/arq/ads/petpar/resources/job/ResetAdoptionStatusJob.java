@@ -1,5 +1,6 @@
 package br.edu.ifsp.arq.ads.petpar.resources.job;
 
+import br.edu.ifsp.arq.ads.petpar.domain.service.AdoptionService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,24 +16,28 @@ public class ResetAdoptionStatusJob {
     // job para permitir adoção dos animais caso não seja efetivada.
 
     @Autowired
-    //private CreditAnalysisService creditAnalysisService;
+    private AdoptionService adoptionService;
 
-    @Value("${picpay.request-queue.scheduler-enabled}")
+    @Value("${request-queue.scheduler-enabled}")
     private boolean isSchedulerEnabled;
 
-    @Value("${picpay.request-queue.requests-amount}")
+    @Value("${request-queue.requests-amount}")
     private Integer requestAmount;
+
+    @Value("${request-queue.month-period}")
+    private Integer monthPeriod;
 
     private static final String TIME_ZONE = "America/Sao_Paulo";
 
-    @Scheduled(cron = "${picpay.request-queue.period}", zone = TIME_ZONE)
+    @Scheduled(cron = "${request-queue.period}", zone = TIME_ZONE)
     public void requestMultipleAnalysis() {
-
-
         if (!isSchedulerEnabled) {
             log.warn("[request-queue-scheduler] - disabled");
             return;
         }
+        adoptionService.resetAdoptionStatus(requestAmount,monthPeriod);
+
+
     }
 
 }

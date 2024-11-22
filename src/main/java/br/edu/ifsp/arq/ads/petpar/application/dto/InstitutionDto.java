@@ -22,6 +22,5 @@ public class InstitutionDto {
     private String cpfOrCnpj;
     private String phoneNumber;
     private String password;
-    private LocalDate createdAt;
 
 }

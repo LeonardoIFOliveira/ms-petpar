@@ -20,7 +20,6 @@ public class DonationDto {
 	private Long id;
 	private Double amount;
 	private PaymentMethod paymentMethod;
-	private LocalDate data;
 	private Long institutionId;
 	private Long userId;
 

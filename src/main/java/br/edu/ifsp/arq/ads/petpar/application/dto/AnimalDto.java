@@ -11,6 +11,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 @Builder
 @Getter
 @Setter
@@ -26,8 +28,6 @@ public class AnimalDto {
     private LocalDate birthDate;
     private SpecieType type;
     private StatusAdoption statusAdoption;
-    private LocalDate postedAt;
-    private LocalDate adoptedAt;
     private Long userId;
     private Long institutionId;
 

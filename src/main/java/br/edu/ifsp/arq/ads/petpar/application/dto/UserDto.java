@@ -25,6 +25,5 @@ public class UserDto {
 	private String cpf;
 	private String phoneNumber;
 	private Gender gender;
-	private LocalDate createdAt;
 
 }
