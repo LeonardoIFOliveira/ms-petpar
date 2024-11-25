@@ -10,12 +10,12 @@ import java.util.List;
 
 public interface AnimalRepository extends JpaRepository<AnimalEntity, Long> {
 
-    List<AnimalEntity> findOrderByCreatedAtAsc(Pageable pageable);
+    List<AnimalEntity> findAllByOrderByCreatedAtAsc(Pageable pageable);
 
-    List<AnimalEntity> findByStatusOrderByCreatedAtAsc(StatusAdoption status, Pageable pageable);
+    //List<AnimalEntity> findByStatusAdoptionOrderByCreatedAtAsc(StatusAdoption status, Pageable pageable);
 
 
     List<AnimalEntity> findByInstitutionIdOrderByCreatedAtAsc(String institutionId,Pageable pageable);
 
-    List<AnimalEntity> findByInStatusOrderByCreatedAtDesc(List<StatusAdoption> statusAdoptions, Pageable pageable);
+    List<AnimalEntity> findByStatusAdoptionInOrderByCreatedAtDesc(List<StatusAdoption> statusAdoptions, Pageable pageable);
 }

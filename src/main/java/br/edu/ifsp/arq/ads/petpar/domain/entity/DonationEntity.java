@@ -25,6 +25,6 @@ public class DonationEntity{
 	@OneToOne
 	private InstitutionEntity institution;
 	@OneToOne
-	private UserEntity userEntity;
+	private UserEntity user;
 
 }

@@ -11,7 +11,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="11">
-      <module name="ms-petpar" target="11" />
+      <module name="ms-petpar" target="18" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">

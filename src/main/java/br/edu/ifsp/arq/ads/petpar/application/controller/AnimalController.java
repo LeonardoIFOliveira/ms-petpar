@@ -1,14 +1,13 @@
 package br.edu.ifsp.arq.ads.petpar.application.controller;
 
 import br.edu.ifsp.arq.ads.petpar.application.dto.AnimalDto;
+import br.edu.ifsp.arq.ads.petpar.application.facade.AnimalFacade;
 import br.edu.ifsp.arq.ads.petpar.domain.entity.enums.StatusAdoption;
-import br.edu.ifsp.arq.ads.petpar.domain.service.AnimalService;
-import br.edu.ifsp.arq.ads.petpar.resources.mapper.AnimalMapper;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,20 +16,17 @@ import java.util.List;
 @RestController
 @RequestMapping("/v1/animal")
 @RequiredArgsConstructor
+@Component
 public class AnimalController {
 
-    @Autowired
-    private AnimalService animalService;
+    private final AnimalFacade animalFacade;
 
-    @Autowired
-    private AnimalMapper mapper;
 
 
     @Operation(description = "Lista Animais por status")
     @GetMapping("/list")
     public ResponseEntity<List<AnimalDto>> list(StatusAdoption statusAdoption, Integer pageNumber, Integer pageSize) throws Exception {
-        var response = mapper.toDataTransferObjectList(
-                animalService.listAnimalsByStatus(pageNumber, pageSize, List.of(statusAdoption)));
+        var response = animalFacade.listAnimalsByStatus(pageNumber, pageSize, List.of(statusAdoption));
 
         return ResponseEntity.ok(response);
     }
@@ -39,9 +35,7 @@ public class AnimalController {
     @Operation(description = "Lista animais da instituição")
     @GetMapping("/list-institution/{id}")
     public ResponseEntity<List<AnimalDto>> listByInstitutionId(String institutionId, Integer pageNumber, Integer pageSize) throws Exception {
-        var response = mapper.toDataTransferObjectList(
-                animalService.listAnimalsByInstitution(institutionId, pageNumber, pageSize));
-
+        var response = animalFacade.listAnimalsByInstitution(institutionId, pageNumber, pageSize);
         return ResponseEntity.ok(response);
     }
 
@@ -49,15 +43,14 @@ public class AnimalController {
     @Operation(description = "Salva Animal na base de dados")
     @PostMapping
     public ResponseEntity save(AnimalDto request) throws Exception {
-
-        animalService.save(mapper.toEntity(request));
+        animalFacade.save(request);
         return ResponseEntity.noContent().build();
     }
 
     @Operation(description = "Seleciona animal por id")
     @GetMapping("/{id}")
     public ResponseEntity<AnimalDto> findById(Long id) throws Exception {
-        var response = mapper.toDataTransferObject(animalService.findOrThrowNotFound(id));
+        var response = animalFacade.findOrThrowNotFound(id);
 
         return ResponseEntity.ok(response);
     }
@@ -65,7 +58,7 @@ public class AnimalController {
     @Operation(description = "Deleta animal na base de dados")
     @PutMapping
     public ResponseEntity delete(Long id) throws Exception {
-        animalService.delete(id);
+        animalFacade.delete(id);
         return ResponseEntity.noContent().build();
     }
 }
