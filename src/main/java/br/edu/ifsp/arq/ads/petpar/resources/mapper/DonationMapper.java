@@ -19,14 +19,14 @@ public interface DonationMapper {
 //    @Mapping(source = "userId", target = "user.id")
 //    @Mapping(expression = "java(LocalDateTime.now())", target = "createdAt")
 
-    @Mapping(target = "institution.id", expression = "java(Objects.nonNull(institutionId) ? institutionId ? null)")
-    @Mapping(target = "user.id", expression = "java(Objects.nonNull(userId) ? userId ? null)")
-    @Mapping(expression = "java(LocalDateTime.now())", target = "createdAt")
-    DonationEntity toEntity(DonationDto donationDto, String institutionId, String userId);
-
-    @Mapping(source = "institutionId", target = "institution.id")
-    @Mapping(source = "userId", target = "user.id")
-    List<DonationDto> toDataTransferObjectList(List<DonationEntity> listOfUser);
+    @Mapping(target = "donationDto.institution.id", expression = "java(Objects.nonNull(institutionId) ? institutionId ? null)")
+    @Mapping(target = "donationDto.user.id", expression = "java(Objects.nonNull(userId) ? userId ? null)")
+    //@Mapping(target = "createdAt",  expression = "java(LocalDateTime.now())" )
+    DonationEntity toEntity(DonationDto donationDto);
+//
+//    @Mapping(target = "institution.id", expression = "java(Objects.nonNull(institutionId) ? institutionId ? null)")
+//    @Mapping(target = "user.id", expression = "java(Objects.nonNull(userId) ? userId ? null)")
+//    List<DonationDto> toDataTransferObjectList(List<DonationEntity> listOfUser);
 
 
 }

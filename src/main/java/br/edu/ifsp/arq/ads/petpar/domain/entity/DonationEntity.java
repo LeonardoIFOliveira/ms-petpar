@@ -15,7 +15,6 @@ import java.time.LocalDateTime;
 @Builder
 @EqualsAndHashCode
 public class DonationEntity{
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;

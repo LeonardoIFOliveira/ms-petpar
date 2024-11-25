@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface DonationRepository extends JpaRepository<DonationEntity, Long> {
-    List<DonationEntity> findByUserId(String userId);
-    List<DonationEntity> findByInstitutionId(String userId);
+    List<DonationEntity> findByUserId(Long userId);
+    List<DonationEntity> findByInstitutionId(Long userId);
 
 }

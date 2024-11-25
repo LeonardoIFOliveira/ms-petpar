@@ -23,7 +23,7 @@ public class InstitutionEntity {
     private String name;
     private String description;
     private String email;
-    private String cpfOrCnpj;
+    private String cpfCnpj;
     private String phoneNumber;
     private String password;
     private LocalDateTime createdAt;

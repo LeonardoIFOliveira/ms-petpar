@@ -21,5 +21,7 @@ public class DonationDto {
 	private Long id;
 	private Double amount;
 	private PaymentMethod paymentMethod;
+	private Long userId;
+	private Long institutionId;
 
 }

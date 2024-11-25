@@ -20,16 +20,18 @@ public class DonationFacade {
     private final DonationService donationService;
 
     public List<DonationDto> listOfUser(String userId) throws Exception {
-        return mapper.toDataTransferObjectList(
-                donationService.listOfUser(userId));
+//        return mapper.toDataTransferObjectList(
+//                donationService.listOfUser(userId));
+        return null;
     }
 
     public List<DonationDto> listOfInstitution(String institutionId) throws Exception {
-        return mapper.toDataTransferObjectList(
-                donationService.listOfInstitution(institutionId));
+//        return mapper.toDataTransferObjectList(
+//                donationService.listOfInstitution(institutionId));
+        return null;
     }
 
     public void save(DonationDto donationDto, String institutionId, String userId) throws Exception {
-        donationService.save(mapper.toEntity(donationDto, institutionId, userId));
+        donationService.save(mapper.toEntity(donationDto));
     }
 }
