@@ -1,42 +1,46 @@
 package br.edu.ifsp.arq.ads.petpar.domain.entity;
 
+import br.edu.ifsp.arq.ads.petpar.domain.entity.enums.Gender;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 
-import java.io.Serializable;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Objects;
 
 @Data
-@Entity(name ="institutions")
+@Entity(name = "user")
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @EqualsAndHashCode
-public class InstitutionEntity {
+public class UserPermitionsEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotNull
+    @Size(min = 3, max = 50)
     private String name;
-    private String description;
+    @NotNull
+    @Email
     private String email;
-    @Column(name = "cpf_or_cnpj")
-    private String cpfOrCnpj;
-    private String phoneNumber;
+    @NotNull
     private String password;
-    @Column(name = "created_at")
-    @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
-    private LocalDateTime createdAt;
-    @Column(name = "updated_at")
-    @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
-    private LocalDateTime updatedAt;
+    @NotNull
+    @Column(name = "birth_date")
+    @JsonFormat(pattern = "dd/MM/yyyy")
+    private LocalDate dateOfBirth;
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    private Gender gender;
+    @NotNull
+    private Boolean active;
     @ManyToMany(fetch = FetchType.EAGER) // fetch = buscar - eager = ancioso
     @JoinTable(name = "user_permission", joinColumns = @JoinColumn(name = "id_user"),
             inverseJoinColumns = @JoinColumn(name = "id_permission"))
     private List<Permission> permissions;
-
 }

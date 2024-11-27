@@ -2,7 +2,9 @@ package br.edu.ifsp.arq.ads.petpar.domain.entity;
 
 
 import br.edu.ifsp.arq.ads.petpar.domain.entity.enums.Gender;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -22,15 +24,19 @@ public class UserEntity{
 	private String name;
 	private String email;
 	private String password;
+	@NotNull
+	@Column(name = "birth_date")
+	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
 	private LocalDate dateOfBirth;
 	private String cpf;
+	@Column(name = "phone_number")
 	private String phoneNumber;
 	private Gender gender;
+	@Column(name = "created_at")
+	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
 	private LocalDateTime createdAt;
+	@Column(name = "updated_at")
+	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
 	private LocalDateTime updatedAt;
-	@ManyToMany(fetch = FetchType.EAGER) // fetch = buscar - eager = ancioso
-	@JoinTable(name = "user_permission", joinColumns = @JoinColumn(name = "id_user"),
-			inverseJoinColumns = @JoinColumn(name = "id_permission"))
-	private List<Permission> permissions;
 
 }

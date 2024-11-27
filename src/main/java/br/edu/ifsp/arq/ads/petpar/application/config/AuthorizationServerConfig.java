@@ -1,6 +1,5 @@
 package br.edu.ifsp.arq.ads.petpar.application.config;
 
-import br.edu.ifsp.arq.ads.petpar.resources.security.SystemInstitution;
 import br.edu.ifsp.arq.ads.petpar.resources.security.SystemUser;
 import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
@@ -105,18 +104,10 @@ public class AuthorizationServerConfig {
     OAuth2TokenCustomizer<JwtEncodingContext> jwtBuildCustomizer() {
         return (context) -> {
             UsernamePasswordAuthenticationToken authenticationToken = context.getPrincipal();
-            if(authenticationToken.getPrincipal() instanceof SystemUser){
-                SystemUser systemUser = systemUser = (SystemUser) authenticationToken.getPrincipal();
-                Set<String> authorities = getAuthorities(systemUser);
-                context.getClaims().claim("name", systemUser.getUser().getName());
-                context.getClaims().claim("authorities", authorities);
-            }else{
-                SystemInstitution systemInstitution = (SystemInstitution) authenticationToken.getPrincipal();
-                Set<String> authorities = getAuthorities(systemInstitution);
-                context.getClaims().claim("name", systemInstitution.getInstitution().getName());
-                context.getClaims().claim("authorities", authorities);
-            }
-
+            SystemUser systemUser = systemUser = (SystemUser) authenticationToken.getPrincipal();
+            Set<String> authorities = getAuthorities(systemUser);
+            context.getClaims().claim("name", systemUser.getUser().getName());
+            context.getClaims().claim("authorities", authorities);
         };
     }
 

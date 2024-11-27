@@ -10,6 +10,6 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO user (id, name, email, password, birth_date, gender, active) 
-	values (1, 'Fernando Duarte', 'fernandoduarte@ifsp.edu.br', '$2a$10$Ot4XGuyPP7r82nN3WXA0bOL1Qk9gShKDlVuPoyp89HoFnHcwO4Tji', '1975-11-16', 'MASCULINO', 1);
+	values (1, 'Sara duran', 'saraduran174@gmail.com', '$2a$10$Ot4XGuyPP7r82nN3WXA0bOL1Qk9gShKDlVuPoyp89HoFnHcwO4Tji', '2000-09-25', 'FEMININO', 1);
 INSERT INTO user (id, name, email, password, birth_date, gender, active) 
-	values (2, 'Gislaine Rosales', 'gislainerosales@ifsp.edu.br', '$2a$10$Ot4XGuyPP7r82nN3WXA0bOL1Qk9gShKDlVuPoyp89HoFnHcwO4Tji', '1980-01-01', 'FEMININO', 1);
+	values (2, 'Leonardo Fernandes', 'leonardo.fernandes@aluno.ifsp.edu.br', '$2a$10$Ot4XGuyPP7r82nN3WXA0bOL1Qk9gShKDlVuPoyp89HoFnHcwO4Tji', '2000-08-29', 'MASCULINO', 1);

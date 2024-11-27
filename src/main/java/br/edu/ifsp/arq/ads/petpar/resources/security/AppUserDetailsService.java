@@ -1,6 +1,8 @@
 package br.edu.ifsp.arq.ads.petpar.resources.security;
 
 import br.edu.ifsp.arq.ads.petpar.domain.entity.UserEntity;
+import br.edu.ifsp.arq.ads.petpar.domain.entity.UserPermitionsEntity;
+import br.edu.ifsp.arq.ads.petpar.domain.repository.UserPermitionRepository;
 import br.edu.ifsp.arq.ads.petpar.domain.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -19,16 +21,16 @@ import java.util.Set;
 public class AppUserDetailsService implements UserDetailsService {
 
 	@Autowired
-	private UserRepository userRepository;
+	private UserPermitionRepository userRepository;
 
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-		Optional<UserEntity> userOptional = userRepository.findByEmail(email);
-        UserEntity user = userOptional.orElseThrow(() -> new UsernameNotFoundException("Usuário e/ou senha incorretos"));
+		Optional<UserPermitionsEntity> userOptional = userRepository.findByEmail(email);
+		UserPermitionsEntity user = userOptional.orElseThrow(() -> new UsernameNotFoundException("Usuário e/ou senha incorretos"));
 		return new SystemUser(user, getPermissions(user));
 	}
 
-	private Collection<? extends GrantedAuthority> getPermissions(UserEntity user) {
+	private Collection<? extends GrantedAuthority> getPermissions(UserPermitionsEntity user) {
 		Set<SimpleGrantedAuthority> authorities = new HashSet<>();
 		user.getPermissions().forEach(p -> authorities.add(
 				new SimpleGrantedAuthority(p.getDescription().toUpperCase())));
