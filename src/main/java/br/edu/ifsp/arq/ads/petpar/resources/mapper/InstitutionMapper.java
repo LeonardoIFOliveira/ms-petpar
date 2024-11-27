@@ -5,10 +5,12 @@ import br.edu.ifsp.arq.ads.petpar.application.dto.UserDto;
 import br.edu.ifsp.arq.ads.petpar.domain.entity.InstitutionEntity;
 import br.edu.ifsp.arq.ads.petpar.domain.entity.UserEntity;
 import org.mapstruct.Mapper;
+import org.mapstruct.ReportingPolicy;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE, imports = {LocalDateTime.class})
 public interface InstitutionMapper {
 
     InstitutionEntity toEntity(InstitutionDto institutionDto);

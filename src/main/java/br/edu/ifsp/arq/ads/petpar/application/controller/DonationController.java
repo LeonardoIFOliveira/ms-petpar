@@ -1,8 +1,7 @@
 package br.edu.ifsp.arq.ads.petpar.application.controller;
 
 import br.edu.ifsp.arq.ads.petpar.application.dto.DonationDto;
-import br.edu.ifsp.arq.ads.petpar.domain.service.DonationService;
-import br.edu.ifsp.arq.ads.petpar.resources.mapper.DonationMapper;
+import br.edu.ifsp.arq.ads.petpar.application.facade.DonationFacade;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,15 +18,12 @@ import java.util.List;
 public class DonationController {
 
     @Autowired
-    private DonationService donationService;
-    @Autowired
-    private DonationMapper mapper;
-
+    private DonationFacade donationFacade;
 
     @Operation(description = "Efetua doação")
     @PostMapping
-    public ResponseEntity save(DonationDto donationDto) throws Exception {
-        donationService.save(mapper.toEntity(donationDto));
+    public ResponseEntity save(DonationDto donationDto, String institutionId,String userId) throws Exception {
+        donationFacade.save(donationDto, institutionId, userId);
         return ResponseEntity.noContent().build();
     }
 
@@ -35,8 +31,7 @@ public class DonationController {
     @Operation(description = "Lista Animais por status")
     @GetMapping("/list-user")
     public ResponseEntity<List<DonationDto>> listUser(String userId) throws Exception {
-        var response = mapper.toDataTransferObjectList(
-                donationService.listOfUser(userId));
+        var response = donationFacade.listOfUser(userId);
 
         return ResponseEntity.ok(response);
     }
@@ -44,9 +39,7 @@ public class DonationController {
     @Operation(description = "Lista Animais por status")
     @GetMapping("/list-institution")
     public ResponseEntity<List<DonationDto>> listInstituition(String institutionId) throws Exception {
-        var response = mapper.toDataTransferObjectList(
-                donationService.listOfInstitution(institutionId));
-
+        var response = donationFacade.listOfInstitution(institutionId);
         return ResponseEntity.ok(response);
     }
 

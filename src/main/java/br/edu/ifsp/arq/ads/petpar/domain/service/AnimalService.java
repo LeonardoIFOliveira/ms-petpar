@@ -23,7 +23,7 @@ public class AnimalService {
 
     public List<AnimalEntity> listAnimals(Integer pageNumber, Integer pageSize){
         var pageable = PageRequest.of(pageNumber,pageSize);
-        return animalRepository.findOrderByCreatedAtAsc(pageable);
+        return animalRepository.findAllByOrderByCreatedAtAsc(pageable);
     }
 
     public List<AnimalEntity> listAnimalsByInstitution(String institutionId,Integer pageNumber, Integer pageSize){
@@ -47,6 +47,6 @@ public class AnimalService {
     }
     public List<AnimalEntity> listAnimalsByStatus(Integer pageNumber, Integer pageSize, List<StatusAdoption> statusAdoptions){
         var pageable = PageRequest.of(pageNumber,pageSize);
-        return animalRepository.findByInStatusOrderByCreatedAtDesc(statusAdoptions,pageable);
+        return animalRepository.findByStatusAdoptionInOrderByCreatedAtDesc(statusAdoptions,pageable);
     }
 }

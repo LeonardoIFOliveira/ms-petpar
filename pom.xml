@@ -14,12 +14,17 @@
 	<name>spring-kafka-nodered</name>
 	<description>Project to read and send a message by kafka using proxy and integrate with nodered</description>
 	<properties>
-		<java.version>17</java.version>
+		<java.version>18</java.version>
 	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>org.mapstruct</groupId>
 			<artifactId>mapstruct</artifactId>
+			<version>1.4.2.Final</version>
+		</dependency>
+		<dependency>
+			<groupId>org.mapstruct</groupId>
+			<artifactId>mapstruct-processor</artifactId>
 			<version>1.4.2.Final</version>
 		</dependency>
 		<dependency>

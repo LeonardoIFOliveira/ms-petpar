@@ -26,7 +26,7 @@ public class InstitutionService {
 
     //TODO saveOrUpdate
     public void save(InstitutionEntity request) throws Exception {
-        findByEmailOrCPF(request.getEmail(), request.getCpfOrCnpj()).orElseGet(() -> {
+        findByEmailOrCPF(request.getEmail(), request.getCpfCnpj()).orElseGet(() -> {
             String passwordEncripted = PasswordEncodeUtil.encode(request.getPassword());
             request.setPassword(passwordEncripted);
             institutionRepository.save(request);
@@ -39,7 +39,7 @@ public class InstitutionService {
         institutionRepository.deleteById(id);
     }
     public Optional<InstitutionEntity> findByEmailOrCPF(String email, String cpf) throws Exception {
-        return institutionRepository.findByEmailOrCpfOrCnpj(email, cpf);
+        return institutionRepository.findByEmailOrCpfCnpj(email, cpf);
     }
     public InstitutionEntity findOrThrowNotFound(Long id) throws Exception {
         return institutionRepository.findById(id)

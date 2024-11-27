@@ -19,11 +19,11 @@ public class DonationService {
         donationRepository.save(request);
     }
 
-    public List<DonationEntity> listOfUser(String userId) throws Exception {
+    public List<DonationEntity> listOfUser(Long userId) throws Exception {
         return donationRepository.findByUserId(userId);
     }
 
-    public List<DonationEntity> listOfInstitution(String institutionId) throws Exception {
+    public List<DonationEntity> listOfInstitution(Long institutionId) throws Exception {
         return donationRepository.findByInstitutionId(institutionId);
     }
 }

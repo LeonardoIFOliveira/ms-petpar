@@ -12,7 +12,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
-@Entity(name ="s")
+@Entity(name ="animals")
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
