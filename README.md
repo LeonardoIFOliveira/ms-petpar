@@ -26,7 +26,7 @@ e digitar a senha 123456
 - Mover o arquivo petpar.jks para a nova pasta criada
 
 
-###Segundo passo: Rodar Docker
+### Segundo passo: Rodar Docker
  Ter o Docker e a ferramenta de administração de banco da sua escolha
 * comando : ```docker compose -f docker-db.yml up ```
 * abrir o bash:  ```docker exec -it PetPar bash```
