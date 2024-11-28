@@ -26,11 +26,11 @@ public class DonationEntity{
 	@Column(name = "created_at")
 	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
 	private LocalDateTime createdAt;
-	@OneToOne
-	@JoinColumn(name = "institution_id")
-	private InstitutionEntity institution;
-	@OneToOne
-	@JoinColumn(name = "user_id")
-	private UserEntity userEntity;
+	@OneToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name = "institution_id", referencedColumnName = "id")
+	private InstitutionEntity institutionId;
+	@OneToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name = "user_id", referencedColumnName = "id")
+	private UserEntity userId;
 
 }

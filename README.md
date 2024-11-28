@@ -30,7 +30,7 @@ e digitar a senha 123456
  Ter o Docker e a ferramenta de administração de banco da sua escolha
 * comando : ```docker compose -f docker-db.yml up ```
 * abrir o bash:  ```docker exec -it PetPar bash```
-* abrir o mysql: ```mysql -u root -p```
+* abrir o mysql: ```mysql -u root -p``` a senha é: root
 * criar base: ```CREATE DATABASE PetPar;```
 * resetar usuarios: ```update mysql.user set host='%' where user='root';``` 
 * limpar privilegios: ```FLUSH PRIVILEGES;```

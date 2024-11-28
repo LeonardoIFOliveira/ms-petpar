@@ -15,14 +15,16 @@ CREATE TABLE user_permission (
 INSERT INTO user (id, name, email, password, birth_date, gender, active) values (3, 'Administrador', 'admin@ifsp.edu.br', '$2a$10$X607ZPhQ4EgGNaYKt3n4SONjIv9zc.VMWdEuhCuba7oLAL5IvcL5.', '1975-11-16', 'MASCULINO', 1);
 
 -- user
+-- TODO: usuario
 INSERT INTO permission (id, description) values (1, 'ROLE_REGISTER_USER');
 INSERT INTO permission (id, description) values (2, 'ROLE_REMOVE_USER');
 INSERT INTO permission (id, description) values (3, 'ROLE_SEARCH_USER');
 
 -- activity
-INSERT INTO permission (id, description) values (4, 'ROLE_REGISTER_ACTIVITY');
-INSERT INTO permission (id, description) values (5, 'ROLE_REMOVE_ACTIVITY');
-INSERT INTO permission (id, description) values (6, 'ROLE_SEARCH_ACTIVITY');
+-- TODO: instituicao
+INSERT INTO permission (id, description) values (4, 'ROLE_REGISTER_INSTITUTION');
+INSERT INTO permission (id, description) values (5, 'ROLE_REMOVE_INSTITUTION');
+INSERT INTO permission (id, description) values (6, 'ROLE_SEARCH_INSTITUTION');
 
 -- admin
 INSERT INTO user_permission (id_user, id_permission) values (3, 1);

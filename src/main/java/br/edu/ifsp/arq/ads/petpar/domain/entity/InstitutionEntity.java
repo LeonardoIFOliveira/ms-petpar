@@ -25,7 +25,7 @@ public class InstitutionEntity {
     private String description;
     private String email;
     @Column(name = "cpf_or_cnpj")
-    private String cpfOrCnpj;
+    private String cpfCnpj;
     private String phoneNumber;
     private String password;
     @Column(name = "created_at")

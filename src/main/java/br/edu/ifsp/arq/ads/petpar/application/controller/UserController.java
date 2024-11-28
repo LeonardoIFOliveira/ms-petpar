@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @Slf4j
@@ -22,11 +23,10 @@ public class UserController {
     @Autowired
     private UserMapper mapper;
 
-    //TODO
-    //@PreAuthorize("hasAuthority('ROLE_SEARCH_USER') and hasAuthority('SCOPE_read')")
     @Operation(description = "Loga usuário")
     @GetMapping("/login")
-    public ResponseEntity listByInstitutionId(String email, String senha) throws Exception {
+    @PreAuthorize("hasRole('ROLE_SEARCH_USER') and hasAuthority('SCOPE_read')")
+    public ResponseEntity listByInstitutionId( @RequestParam String email, @RequestParam String senha) throws Exception {
         userService.login(email,senha);
         return ResponseEntity.noContent().build();
     }
@@ -34,7 +34,8 @@ public class UserController {
 
     @Operation(description="Salva usuário na base de dados")
     @PostMapping
-    public ResponseEntity save(UserDto request) throws Exception {
+    @PreAuthorize("hasAuthority('ROLE_REGISTER_USER') and hasAuthority('SCOPE_write')")
+    public ResponseEntity save(@RequestBody UserDto request) throws Exception {
 
         userService.save(mapper.toEntity(request));
         return ResponseEntity.noContent().build();
@@ -42,7 +43,8 @@ public class UserController {
 
     @Operation(description = "Seleciona usuário por id")
     @GetMapping("/{id}")
-    public ResponseEntity<UserDto> findById(Long id) throws Exception {
+    @PreAuthorize("hasRole('ROLE_SEARCH_USER') and hasAuthority('SCOPE_read')")
+    public ResponseEntity<UserDto> findById( @PathVariable Long id) throws Exception {
         var response = mapper.toDataTransferObject(userService.findOrThrowNotFound(id));
 
         return ResponseEntity.ok(response);
@@ -50,7 +52,8 @@ public class UserController {
 
     @Operation(description = "Deleta usuário na base de dados")
     @PutMapping
-    public ResponseEntity delete(Long id) throws Exception {
+    @PreAuthorize("hasAuthority('ROLE_REMOVE_USER') and hasAuthority('SCOPE_write')")
+    public ResponseEntity delete( @RequestParam Long id) throws Exception {
         userService.delete(id);
         return ResponseEntity.noContent().build();
     }

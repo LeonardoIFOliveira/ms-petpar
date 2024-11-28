@@ -1,6 +1,8 @@
 package br.edu.ifsp.arq.ads.petpar.domain.service;
 
 import br.edu.ifsp.arq.ads.petpar.domain.entity.DonationEntity;
+import br.edu.ifsp.arq.ads.petpar.domain.entity.InstitutionEntity;
+import br.edu.ifsp.arq.ads.petpar.domain.entity.UserEntity;
 import br.edu.ifsp.arq.ads.petpar.domain.repository.DonationRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,10 +22,10 @@ public class DonationService {
     }
 
     public List<DonationEntity> listOfUser(Long userId) throws Exception {
-        return donationRepository.findByUserId(userId);
+        return donationRepository.findByUserId(UserEntity.builder().id(userId).build());
     }
 
     public List<DonationEntity> listOfInstitution(Long institutionId) throws Exception {
-        return donationRepository.findByInstitutionId(institutionId);
+        return donationRepository.findByInstitutionId(InstitutionEntity.builder().id(institutionId).build());
     }
 }

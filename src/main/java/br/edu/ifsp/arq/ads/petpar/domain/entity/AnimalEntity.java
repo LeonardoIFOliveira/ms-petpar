@@ -43,10 +43,10 @@ public class AnimalEntity {
     @Column(name = "updated_at")
     @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
     private LocalDateTime updatedAt;
-    @OneToOne
+    @OneToOne(cascade=CascadeType.ALL)
     @JoinColumn(name = "user_id")
     private UserEntity userEntity;
-    @OneToOne
+    @OneToOne(cascade=CascadeType.ALL)
     @JoinColumn(name = "institution_id")
     private InstitutionEntity institution;
 

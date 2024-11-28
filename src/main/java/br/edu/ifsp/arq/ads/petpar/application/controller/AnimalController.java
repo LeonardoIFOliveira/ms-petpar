@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,6 +26,7 @@ public class AnimalController {
 
     @Operation(description = "Lista Animais por status")
     @GetMapping("/list")
+    @PreAuthorize("hasAuthority('ROLE_REGISTER_USER') and hasAuthority('SCOPE_read')")
     public ResponseEntity<List<AnimalDto>> list(StatusAdoption statusAdoption, Integer pageNumber, Integer pageSize) throws Exception {
         var response = animalFacade.listAnimalsByStatus(pageNumber, pageSize, List.of(statusAdoption));
 
@@ -34,6 +36,7 @@ public class AnimalController {
 
     @Operation(description = "Lista animais da instituição")
     @GetMapping("/list-institution/{id}")
+    @PreAuthorize("hasAuthority('ROLE_REGISTER_INSTITUTION') and hasAuthority('SCOPE_read')")
     public ResponseEntity<List<AnimalDto>> listByInstitutionId(String institutionId, Integer pageNumber, Integer pageSize) throws Exception {
         var response = animalFacade.listAnimalsByInstitution(institutionId, pageNumber, pageSize);
         return ResponseEntity.ok(response);
@@ -42,6 +45,7 @@ public class AnimalController {
 
     @Operation(description = "Salva Animal na base de dados")
     @PostMapping
+    @PreAuthorize("hasAuthority('ROLE_REGISTER_INSTITUTION') and hasAuthority('SCOPE_write')")
     public ResponseEntity save(AnimalDto request) throws Exception {
         animalFacade.save(request);
         return ResponseEntity.noContent().build();
@@ -49,6 +53,7 @@ public class AnimalController {
 
     @Operation(description = "Seleciona animal por id")
     @GetMapping("/{id}")
+    @PreAuthorize("hasRole('ROLE_SEARCH_USER') and hasAuthority('SCOPE_read')")
     public ResponseEntity<AnimalDto> findById(Long id) throws Exception {
         var response = animalFacade.findOrThrowNotFound(id);
 
@@ -57,6 +62,7 @@ public class AnimalController {
 
     @Operation(description = "Deleta animal na base de dados")
     @PutMapping
+    @PreAuthorize("hasAuthority('ROLE_REMOVE_INSTITUTION') and hasAuthority('SCOPE_write')")
     public ResponseEntity delete(Long id) throws Exception {
         animalFacade.delete(id);
         return ResponseEntity.noContent().build();

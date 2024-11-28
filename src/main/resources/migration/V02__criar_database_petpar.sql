@@ -24,7 +24,7 @@ CREATE TABLE institutions (
     name VARCHAR(255) NOT NULL,
     description TEXT,
     email VARCHAR(255) NOT NULL UNIQUE,
-    cpf_or_cnpj VARCHAR(18) UNIQUE,
+    cpf_cnpj VARCHAR(18) UNIQUE,
     phone_number VARCHAR(20),
     password VARCHAR(255) NOT NULL,
     updated_at TIMESTAMP NULL,
