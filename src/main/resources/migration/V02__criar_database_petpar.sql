@@ -10,7 +10,7 @@ CREATE TABLE users (
     name VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
-    date_of_birth DATE,
+    birth_date DATE,
     cpf VARCHAR(14) UNIQUE,
     phone_number VARCHAR(20),
     gender ENUM('MASCULINO', 'FEMININO', 'OUTRO', 'PREFIRO_NAO_DIZER'),

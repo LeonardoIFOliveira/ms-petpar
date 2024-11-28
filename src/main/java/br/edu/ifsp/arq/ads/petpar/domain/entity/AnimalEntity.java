@@ -29,7 +29,7 @@ public class AnimalEntity {
     private Gender gender;
     @NotNull
     @Column(name = "birth_date")
-    @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate birthDate;
     @NotNull
     private SpecieType type;
