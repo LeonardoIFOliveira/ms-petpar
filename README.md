@@ -1,7 +1,9 @@
 # ms-petpar
 ## Integrantes
 *Sara Valentina Duran Campos*
+
 *Giovanni Giannetti*
+
 *Leonardo de Oliveira Fernandes*
 ## Dependencias
 *Java 18*
