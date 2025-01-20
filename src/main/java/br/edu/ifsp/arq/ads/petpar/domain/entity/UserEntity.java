@@ -31,6 +31,8 @@ public class UserEntity{
 	private String cpf;
 	@Column(name = "phone_number")
 	private String phoneNumber;
+	@NotNull
+	@Enumerated(EnumType.STRING)
 	private Gender gender;
 	@Column(name = "created_at")
 	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
@@ -38,5 +40,9 @@ public class UserEntity{
 	@Column(name = "updated_at")
 	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
 	private LocalDateTime updatedAt;
+	@ManyToMany(fetch = FetchType.EAGER) // fetch = buscar - eager = ancioso
+	@JoinTable(name = "user_permission", joinColumns = @JoinColumn(name = "id_user"),
+			inverseJoinColumns = @JoinColumn(name = "id_permission"))
+	private List<Permission> permissions;
 
 }

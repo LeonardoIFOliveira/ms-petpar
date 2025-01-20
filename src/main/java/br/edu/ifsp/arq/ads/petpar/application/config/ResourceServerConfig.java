@@ -18,6 +18,7 @@ import org.springframework.security.oauth2.server.authorization.config.annotatio
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
 import org.springframework.security.oauth2.server.resource.authentication.JwtGrantedAuthoritiesConverter;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.util.StringUtils;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -29,12 +30,34 @@ import java.util.stream.Collectors;
 @EnableMethodSecurity(prePostEnabled = true)
 public class ResourceServerConfig {
 
+//	@Bean
+//	SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
+//		http.authorizeHttpRequests(auth -> auth.anyRequest()
+//				.authenticated()).csrf(AbstractHttpConfigurer::disable)
+//				.oauth2ResourceServer(configurer -> configurer
+//						.jwt(jwtConfigurer -> jwtConfigurer.jwtAuthenticationConverter(jwtAuthenticationConverter())));
+//		return http.formLogin(Customizer.withDefaults()).build();
+//	}
+
 	@Bean
 	SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
-		http.authorizeHttpRequests(auth -> auth.anyRequest()
-				.authenticated()).csrf(AbstractHttpConfigurer::disable)
-				.oauth2ResourceServer(configurer -> configurer
-						.jwt(jwtConfigurer -> jwtConfigurer.jwtAuthenticationConverter(jwtAuthenticationConverter())));
+		http.authorizeHttpRequests(auth -> {
+			auth.requestMatchers("/users", "/v3/api-docs/**", "/swagger-ui/**").permitAll();
+			auth.anyRequest().authenticated();
+		}).csrf(AbstractHttpConfigurer::disable).oauth2ResourceServer(configurer -> configurer
+				.jwt(jwtConfigurer -> jwtConfigurer.jwtAuthenticationConverter(jwtAuthenticationConverter())));
+		http.logout(logoutConfig -> {
+			logoutConfig.logoutSuccessHandler((httpServletRequest, httpServletResponse, authentication) -> {
+				String returnTo = httpServletRequest.getParameter("returnTo");
+
+				if (!StringUtils.hasText(returnTo)) {
+					returnTo = "http://localhost:8080";
+				}
+
+				httpServletResponse.setStatus(302);
+				httpServletResponse.sendRedirect(returnTo);
+			});
+		});
 		return http.formLogin(Customizer.withDefaults()).build();
 	}
 

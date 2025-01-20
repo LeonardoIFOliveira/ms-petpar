@@ -1,5 +1,6 @@
 package br.edu.ifsp.arq.ads.petpar.application.config;
 
+import br.edu.ifsp.arq.ads.petpar.resources.security.SystemInstitution;
 import br.edu.ifsp.arq.ads.petpar.resources.security.SystemUser;
 import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
@@ -45,8 +46,8 @@ public class AuthorizationServerConfig {
 
     @Bean
     RegisteredClientRepository registeredClientRepository() {
-    	List<String> allowedRedirects = Arrays.asList("http://cti-OptiPlex-3080:8000","https://oidcdebugger.com/debug");
-    	
+        List<String> allowedRedirects = Arrays.asList("http://localhost:8080/swagger-ui/oauth2-redirect.html","http://cti-optiplex-3080:8000/authorized","https://oidcdebugger.com/debug");
+
         RegisteredClient angularClient = RegisteredClient
                 .withId(UUID.randomUUID().toString())
                 .clientId("angular")
@@ -62,8 +63,8 @@ public class AuthorizationServerConfig {
                         .refreshTokenTimeToLive(Duration.ofDays(30))
                         .build())
                 .clientSettings(ClientSettings.builder()
-                                .requireAuthorizationConsent(true)
-                                .build())
+                        .requireAuthorizationConsent(true)
+                        .build())
                 .build();
 
         RegisteredClient mobileClient = RegisteredClient
@@ -76,7 +77,7 @@ public class AuthorizationServerConfig {
                 .redirectUris(uris -> uris.addAll(allowedRedirects))
                 .scope("read")
                 .tokenSettings(TokenSettings.builder()
-                        .accessTokenTimeToLive(Duration.ofMinutes(30))
+                        .accessTokenTimeToLive(Duration.ofMinutes(1))
                         .refreshTokenTimeToLive(Duration.ofDays(30))
                         .build())
                 .clientSettings(ClientSettings.builder()
@@ -84,11 +85,24 @@ public class AuthorizationServerConfig {
                         .build())
                 .build();
 
+        RegisteredClient swaggerClient = RegisteredClient.withId(UUID.randomUUID().toString())
+                .clientId("swagger-client")
+                .clientSecret("{noop}swagger-secret")
+                .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
+                .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
+                .redirectUris(uris -> uris.addAll(allowedRedirects))
+                .scope("read")
+                .scope("write")
+                .clientSettings(ClientSettings.builder().requireProofKey(true).build())
+                .tokenSettings(TokenSettings.builder().accessTokenTimeToLive(Duration.ofHours(1)).build())
+                .build();
+
 
         return new InMemoryRegisteredClientRepository(
                 Arrays.asList(
                         angularClient,
-                        mobileClient
+                        mobileClient,
+                        swaggerClient
                 )
         );
     }
@@ -104,10 +118,20 @@ public class AuthorizationServerConfig {
     OAuth2TokenCustomizer<JwtEncodingContext> jwtBuildCustomizer() {
         return (context) -> {
             UsernamePasswordAuthenticationToken authenticationToken = context.getPrincipal();
-            SystemUser systemUser = systemUser = (SystemUser) authenticationToken.getPrincipal();
-            Set<String> authorities = getAuthorities(systemUser);
-            context.getClaims().claim("name", systemUser.getUser().getName());
-            context.getClaims().claim("authorities", authorities);
+            if(authenticationToken.getPrincipal() instanceof SystemUser){
+                SystemUser systemUser = systemUser = (SystemUser) authenticationToken.getPrincipal();
+                Set<String> authorities = getAuthorities(systemUser);
+                context.getClaims().claim("id", systemUser.getUser().getId());
+                context.getClaims().claim("name", systemUser.getUser().getName());
+                context.getClaims().claim("authorities", authorities);
+            }else{
+                SystemInstitution systemInstitution = (SystemInstitution) authenticationToken.getPrincipal();
+                Set<String> authorities = getAuthorities(systemInstitution);
+                context.getClaims().claim("id", systemInstitution.getInstitution().getId());
+                context.getClaims().claim("name", systemInstitution.getInstitution().getName());
+                context.getClaims().claim("authorities", authorities);
+            }
+
         };
     }
 

@@ -13,7 +13,8 @@ CREATE TABLE users (
     birth_date DATE,
     cpf VARCHAR(14) UNIQUE,
     phone_number VARCHAR(20),
-    gender ENUM('MASCULINO', 'FEMININO', 'OUTRO', 'PREFIRO_NAO_DIZER'),
+    gender varchar(30) NOT NULL,
+    active tinyint(1) NOT NULL,
     updated_at TIMESTAMP NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
@@ -27,6 +28,7 @@ CREATE TABLE institutions (
     cpf_cnpj VARCHAR(18) UNIQUE,
     phone_number VARCHAR(20),
     password VARCHAR(255) NOT NULL,
+    active tinyint(1) NOT NULL,
     updated_at TIMESTAMP NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 

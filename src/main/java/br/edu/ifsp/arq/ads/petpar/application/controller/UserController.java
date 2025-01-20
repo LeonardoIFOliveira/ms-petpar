@@ -11,10 +11,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-@Slf4j
 @RestController
 @RequestMapping("/v1/user")
-@RequiredArgsConstructor
 public class UserController {
 
     @Autowired
@@ -23,7 +21,6 @@ public class UserController {
     @Autowired
     private UserMapper mapper;
 
-    @Operation(description = "Loga usuário")
     @GetMapping("/login")
     @PreAuthorize("hasRole('ROLE_SEARCH_USER') and hasAuthority('SCOPE_read')")
     public ResponseEntity listByInstitutionId( @RequestParam String email, @RequestParam String senha) throws Exception {
@@ -31,8 +28,6 @@ public class UserController {
         return ResponseEntity.noContent().build();
     }
 
-
-    @Operation(description="Salva usuário na base de dados")
     @PostMapping
     @PreAuthorize("hasAuthority('ROLE_REGISTER_USER') and hasAuthority('SCOPE_write')")
     public ResponseEntity save(@RequestBody UserDto request) throws Exception {
@@ -41,7 +36,6 @@ public class UserController {
         return ResponseEntity.noContent().build();
     }
 
-    @Operation(description = "Seleciona usuário por id")
     @GetMapping("/{id}")
     @PreAuthorize("hasRole('ROLE_SEARCH_USER') and hasAuthority('SCOPE_read')")
     public ResponseEntity<UserDto> findById( @PathVariable Long id) throws Exception {
@@ -50,7 +44,6 @@ public class UserController {
         return ResponseEntity.ok(response);
     }
 
-    @Operation(description = "Deleta usuário na base de dados")
     @PutMapping
     @PreAuthorize("hasAuthority('ROLE_REMOVE_USER') and hasAuthority('SCOPE_write')")
     public ResponseEntity delete( @RequestParam Long id) throws Exception {
