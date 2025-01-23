@@ -37,3 +37,13 @@ e digitar a senha 123456
 * resetar usuarios: ```update mysql.user set host='%' where user='root';``` 
 * limpar privilegios: ```FLUSH PRIVILEGES;```
 * executar arquivos ```.sql``` da pasta migration na base de dados criada
+
+### Terceiro passo: Iniciar o microserviço
+ 
+* Validar se a porta do banco de dados equivale ao seu servidor mysql, no arquivo application.yml campo datasource.url
+* Rodar o a classe main PetParApplication
+* Acessar via Swagger http://localhost:8080/swagger-ui/index.html
+* Acessar diretamente o microserviço http://localhost:8080/
+* Logar no Authorize usando o usuário admin: 
+  - username: admin@ifsp.edu.br 
+  - senha: admin
