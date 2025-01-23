@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Instituição- PetPar</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/cadastro.css">
+</head>
+<body >
+<!-- NavBar -->
+<nav class="navbar" style="background-color: #cb8c63; box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.4); padding: 10px;">
+  <div class="container-fluid d-flex align-items-center justify-content-between">
+      <a class="navbar-brand" href="home.html">
+          <img alt="logo" src="img/logoPetPar.png" style="max-width: 150px;">
+      </a>
+      <ul class="navbar-nav d-flex flex-row align-items-center" style="gap: 20px; list-style: none; margin: 0; padding: 0;">
+          <li class="nav-item">
+              <a href="home.html" class="nav-link" style="text-decoration: none; color: white;">Início</a>
+          </li>
+          <li class="nav-item">
+              <a href="userLogin.html" class="nav-link" style="text-decoration: none; color: white;">Quero adotar</a>
+          </li>
+          <li class="nav-item">
+              <a href="institutionLogin.html" class="nav-link" style="text-decoration: none; color: white;">Faça Parte</a>
+          </li>
+          <li class="nav-item">
+              <a href="contato.html" class="nav-link" style="text-decoration: none; color: white;">Contato</a>
+          </li>
+      </ul>
+  </div>
+</nav>
+
+<div class="cadastro-container"> <!-- class="login-container shadow-lg p-5 rounded bg-custom d-flex justify-content-center align-items-center" -->
+    <fieldset>
+        <legend>Login Instituição</legend>
+      <form action="ControllerServlet" method="post" >
+
+        <div class="inputBox">
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+
+        <div class="inputBox">
+          <label for="password">Senha:</label>
+          <input type="password" id="texPassword" name="texPassword" required>
+        </div>
+
+        <button type="submit" name="action" value="institutionLogin">Entrar</button>
+      </form>
+    </fieldset>
+
+    <div class="text-center mt-3">
+      <p class="text-white">Não tem conta?
+      <a href="institutionRegister.html" >Cadastre-se aqui</a></p>
+      <p><a href="#">Esqueceu sua senha?</a></p>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

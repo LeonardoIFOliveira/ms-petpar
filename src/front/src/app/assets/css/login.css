@@ -1,0 +1,68 @@
+body, html {
+	background-image: url('../img/background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100%;
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+}
+
+.bg-custom {
+    background-color: #D9B596;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.login-container {
+    max-width: 400px;
+    width: 100%;
+    background-color: #8C593B;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+header h2 {
+    font-size: 2rem;
+    color: #FFF;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.form-label {
+    color: #FFF;
+    margin-bottom: 15px;
+}
+
+.inputBox {
+    margin-bottom: 15px;
+}
+
+.btn-adopt {
+    background-color: #BF793B;
+    border-color: #BF793B;
+    color: white;
+    border-radius: 50px;
+    padding: 10px 30px;
+    font-size: 1.2rem;
+    transition: background-color 0.3s ease;
+}
+
+.btn-adopt:hover {
+    background-color: #BF8F73;
+    border-color: #BF8F73;
+}
+
+.text-white a {
+    color: #FFF;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.text-white a:hover {
+    color: #BF8F73;
+}

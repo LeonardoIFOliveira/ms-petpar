@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Animais para Adoção - PetPar</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/cadastro.css">
+
+</head>
+<body>
+    
+<!-- NavBar -->
+<nav class="navbar" style="background-color: #cb8c63; box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.4); padding: 10px;">
+    <div class="container-fluid d-flex align-items-center justify-content-between">
+        <a class="navbar-brand" href="home.html">
+            <img alt="logo" src="img/logoPetPar.png" style="max-width: 150px;">
+        </a>
+        <ul class="navbar-nav d-flex flex-row align-items-center" style="gap: 20px; list-style: none; margin: 0; padding: 0;">
+            <li class="nav-item">
+                <a href="institutionAnimalList.html" class="nav-link" style="text-decoration: none; color: white;">Lista de Pets</a>
+            </li>
+            <li class="nav-item">
+                <a href="institutionAnimalRegister.html" class="nav-link" style="text-decoration: none; color: white;">Cadastro de Pets</a>
+            </li>
+            <li class="nav-item">
+                <a href="donationInstitutionList.html" class="nav-link" style="text-decoration: none; color: white;">Lista de Doações</a>
+            </li>
+            <li class="nav-item">
+                <a href="ControllerServlet?action=logout" class="nav-link" style="text-decoration: none; color: white;">Logout</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+	<div class="lis-container">
+		<div>
+            <fieldset>
+                <legend>Doações Recebidas</legend>
+                <form action="ControllerServlet" method="post">
+                    <div class="row">
+                        <div class="col-12 col-lg-3">
+                            <div class="mb-2">
+                                <label for="initial-date">Data inicial</label>
+                                <input type="date" name="initial-date" id="initial-date"
+                                    class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-3">
+                            <div class="mb-2">
+                                <label for="final-date">Data final</label>
+                                <input type="date" name="final-date" id="final-date"
+                                    class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-3 mt-4">
+                            <button type="submit" class="btn btn-primary" name="action" value="institutionDonation">Filtrar</button>
+                        </div>
+                    </div>
+                </form>
+            </fieldset>
+        <c:choose>
+            <c:when test="${fn:length(institutionDonation) > 0}">
+                <table class="table table-responsive table-striped table-hover" >
+                    <tr>
+                        <th>#</th>
+                        <th>Valor </th>
+                        <th>Nome do doador</th>
+                        <th>Data</th>
+                    </tr>
+                    <c:forEach var="institution" items="${institutionDonation}" varStatus="index">
+                        <tr>
+                            <td>${index.count}</td>
+                            <td>${institution.amount}</td>
+                            <td>${institution.user.name}</td>
+                            <td>
+                                <fmt:parseDate value="${institution.data}" pattern="yyyy-MM-dd" var="parsedDate" type="date" />
+                                <fmt:formatDate value="${parsedDate}" var="newParsedDate" type="date" pattern="dd/MM/yyyy" />
+                                ${newParsedDate}
+                            </td>
+                        </tr>
+                    </c:forEach>
+                </table>
+            </c:when>
+            <c:otherwise>
+                <c:out value="Sem nenhuma doação."></c:out>
+            </c:otherwise>
+        </c:choose>
+	</div>
+
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+	<script type="text/javascript" src="js/home.js"></script>
+</body>
+</html>

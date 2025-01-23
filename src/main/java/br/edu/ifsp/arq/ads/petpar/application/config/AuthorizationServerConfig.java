@@ -1,11 +1,14 @@
 package br.edu.ifsp.arq.ads.petpar.application.config;
 
-import br.edu.ifsp.arq.ads.petpar.resources.security.SystemInstitution;
-import br.edu.ifsp.arq.ads.petpar.resources.security.SystemUser;
-import com.nimbusds.jose.jwk.JWKSet;
-import com.nimbusds.jose.jwk.RSAKey;
-import com.nimbusds.jose.jwk.source.JWKSource;
-import com.nimbusds.jose.proc.SecurityContext;
+import java.io.InputStream;
+import java.security.KeyStore;
+import java.time.Duration;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -33,10 +36,13 @@ import org.springframework.security.oauth2.server.authorization.token.JwtEncodin
 import org.springframework.security.oauth2.server.authorization.token.OAuth2TokenCustomizer;
 import org.springframework.security.web.SecurityFilterChain;
 
-import java.io.InputStream;
-import java.security.KeyStore;
-import java.time.Duration;
-import java.util.*;
+import com.nimbusds.jose.jwk.JWKSet;
+import com.nimbusds.jose.jwk.RSAKey;
+import com.nimbusds.jose.jwk.source.JWKSource;
+import com.nimbusds.jose.proc.SecurityContext;
+
+import br.edu.ifsp.arq.ads.petpar.resources.security.SystemInstitution;
+import br.edu.ifsp.arq.ads.petpar.resources.security.SystemUser;
 
 @Configuration
 public class AuthorizationServerConfig {

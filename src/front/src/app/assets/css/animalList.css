@@ -1,0 +1,33 @@
+body {
+	background-image: url('../img/background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    font-family: 'Arial', sans-serif;
+    background-color: #D9B596;
+    color: #591202;
+}
+
+.BLANCOX-1-hex { color: #BF793B; }
+.BLANCOX-2-hex { color: #D9B596; }
+.BLANCOX-3-hex { color: #8C593B; }
+.BLANCOX-4-hex { color: #BF8F73; }
+.BLANCOX-5-hex { color: #591202; }
+
+.btn-adopt {
+    background-color: #BF793B;
+    border-color: #BF793B;
+    color: white;
+    border-radius: 25px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-adopt:hover {
+    background-color: #BF8F73;
+    border-color: #BF8F73;
+}
+
+footer {
+    background-color: #8C593B;
+    color: white;
+}

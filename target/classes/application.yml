@@ -1,0 +1,21 @@
+service.name: PetPar
+swagger:
+  title: API para o web site de adoção de animais Petpar
+  description: Essa API tem como objetivo disponibilizar todo a funcionalidade do site envolvendo usuarios, instituições, animais e doações
+  version: 1.0.0
+request-queue:
+  period: "0 0 * * 0"
+  requests-amount: 10
+  scheduler-enabled: true
+  month-period: 2
+spring:
+  application:
+      name:
+  flyway:
+    baseline-on-migrate: true
+  jpa:
+    database: MYSQL
+  datasource:
+    url: "jdbc:mysql://localhost:3306/PetPar?createDatabaseIfNotExist=true&useSSL=false&useTimezone=true&serverTimezone=UTC&allowPublicKeyRetrieval=true"
+    password: "root"
+    username: "root"

@@ -1,0 +1,41 @@
+
+body {
+	background-image: url('../img/background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    font-family: 'Arial', sans-serif;
+    background-color: #F8F9FA; /* cor de fundo branco */
+}
+.contact-container {
+    background-color: #BF8F73;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    margin: 50px auto;
+}
+.contact-header {
+    text-align: center;
+    color: #591202;
+    margin-bottom: 20px;
+}
+.contact-header h2 {
+    font-weight: 700;
+}
+.form-label {
+    color: #591202;
+}
+.btn-custom {
+    background-color: #BF793B;
+    color: white;
+    border: none;
+    transition: background-color 0.3s;
+}
+.btn-custom:hover {
+    background-color: #8C593B;
+}
+.form-control:focus {
+    border-color: #D9B596;
+    box-shadow: 0 0 5px rgba(217, 181, 150, 0.5);
+}
