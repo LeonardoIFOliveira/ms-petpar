@@ -119,15 +119,17 @@ public class AuthorizationServerConfig {
         return (context) -> {
             UsernamePasswordAuthenticationToken authenticationToken = context.getPrincipal();
             if(authenticationToken.getPrincipal() instanceof SystemUser){
-                SystemUser systemUser = systemUser = (SystemUser) authenticationToken.getPrincipal();
+                SystemUser systemUser = (SystemUser) authenticationToken.getPrincipal();
                 Set<String> authorities = getAuthorities(systemUser);
-                context.getClaims().claim("id", systemUser.getUser().getId());
+                // TODO id
+                context.getClaims().claim("user_id", systemUser.getUser().getId());
                 context.getClaims().claim("name", systemUser.getUser().getName());
                 context.getClaims().claim("authorities", authorities);
             }else{
                 SystemInstitution systemInstitution = (SystemInstitution) authenticationToken.getPrincipal();
                 Set<String> authorities = getAuthorities(systemInstitution);
-                context.getClaims().claim("id", systemInstitution.getInstitution().getId());
+                // TODO id
+                context.getClaims().claim("user_id", systemInstitution.getInstitution().getId());
                 context.getClaims().claim("name", systemInstitution.getInstitution().getName());
                 context.getClaims().claim("authorities", authorities);
             }

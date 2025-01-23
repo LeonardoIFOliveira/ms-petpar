@@ -1,21 +1,25 @@
-service.name: PetPar
-swagger:
-  title: API para o web site de adoção de animais Petpar
-  description: Essa API tem como objetivo disponibilizar todo a funcionalidade do site envolvendo usuarios, instituições, animais e doações
-  version: 1.0.0
-request-queue:
-  period: "0 0 * * 0"
-  requests-amount: 10
-  scheduler-enabled: true
-  month-period: 2
 spring:
   application:
-      name:
+      name: PetPar
   flyway:
     baseline-on-migrate: true
   jpa:
     database: MYSQL
+    show-sql: true
   datasource:
     url: "jdbc:mysql://localhost:3306/PetPar?createDatabaseIfNotExist=true&useSSL=false&useTimezone=true&serverTimezone=UTC&allowPublicKeyRetrieval=true"
     password: "root"
     username: "root"
+  jackson:
+    deserialization:
+      fail-on-unknown-properties: true
+springdoc:
+  oAuthFlow:
+    authorizationUrl: http://127.0.0.1:8080/oauth2/authorize
+    tokenUrl: http://127.0.0.1:8080/oauth2/token
+  swagger-ui:
+    oauth:
+      client-id: angular
+      client-secret: '@ngul@r0'
+      use-pkce-with-authorization-code-grant: true
+      use-basic-authentication-with-access-code-grant: true

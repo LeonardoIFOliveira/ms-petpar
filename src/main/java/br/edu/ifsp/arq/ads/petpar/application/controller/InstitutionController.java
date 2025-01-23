@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/v1/institution-donor")
-public class InstitutionDonorController{
+@RequestMapping("/v1/institution")
+public class InstitutionController {
 
     @Autowired
     private InstitutionFacade institutionFacade;

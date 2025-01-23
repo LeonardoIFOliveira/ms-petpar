@@ -19,7 +19,6 @@ public class AdoptionService {
     @Autowired
     private UserService userService;
 
-
     public void updateAdoptionStatus(Long userId, Long animalId, StatusAdoption statusAdoption) throws Exception {
         try {
             var user = userService.findOrThrowNotFound(userId);
@@ -30,10 +29,7 @@ public class AdoptionService {
         } catch(Exception exception){
             throw exception;
         }
-
-
     }
-
 
     public void resetAdoptionStatus(Integer requestAmount, Integer monthPeriod) {
         animalService.listAnimalsByStatus(1,requestAmount, List.of(StatusAdoption.PENDING_TAKE_ANIMAL)).forEach(animal ->{

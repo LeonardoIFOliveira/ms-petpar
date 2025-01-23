@@ -20,7 +20,6 @@ public class AnimalService {
     @Autowired
     private AnimalRepository animalRepository;
 
-
     public List<AnimalEntity> listAnimals(Integer pageNumber, Integer pageSize){
         var pageable = PageRequest.of(pageNumber,pageSize);
         return animalRepository.findAllByOrderByCreatedAtAsc(pageable);

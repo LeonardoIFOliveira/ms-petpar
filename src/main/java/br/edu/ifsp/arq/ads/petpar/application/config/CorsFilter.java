@@ -14,27 +14,27 @@ import java.io.IOException;
 public class CorsFilter implements Filter{
 
 	private String allowedOrigin = "http://cti-optiplex-3080:8000"; // TODO: Configurar para diferentes ambientes
-	
+
 	@Override
 	public void doFilter(ServletRequest req, ServletResponse resp, FilterChain chain)
 			throws IOException, ServletException {
-		
+
 		HttpServletRequest request = (HttpServletRequest) req;
 		HttpServletResponse response = (HttpServletResponse) resp;
-		
+
 		response.setHeader("Access-Control-Allow-Origin", allowedOrigin);
         response.setHeader("Access-Control-Allow-Credentials", "true");
-		
-		if ("OPTIONS".equals(request.getMethod()) && 
+
+		if ("OPTIONS".equals(request.getMethod()) &&
 				allowedOrigin.equals(request.getHeader("Origin"))) {
 			response.setHeader("Access-Control-Allow-Methods", "POST, GET, DELETE, PUT, OPTIONS");
         		response.setHeader("Access-Control-Allow-Headers", "Authorization, Content-Type, Accept");
         		response.setHeader("Access-Control-Max-Age", "3600");
-			
+
 			response.setStatus(HttpServletResponse.SC_OK);
 		} else {
 			chain.doFilter(req, resp);
 		}
-		
+
 	}
 }

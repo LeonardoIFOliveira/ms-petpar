@@ -42,7 +42,7 @@ public class ResourceServerConfig {
 	@Bean
 	SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
 		http.authorizeHttpRequests(auth -> {
-			auth.requestMatchers("/users", "/v3/api-docs/**", "/swagger-ui/**").permitAll();
+			auth.requestMatchers("/v1/user","/v1/institution", "/v3/api-docs/**", "/swagger-ui/**").permitAll();
 			auth.anyRequest().authenticated();
 		}).csrf(AbstractHttpConfigurer::disable).oauth2ResourceServer(configurer -> configurer
 				.jwt(jwtConfigurer -> jwtConfigurer.jwtAuthenticationConverter(jwtAuthenticationConverter())));
