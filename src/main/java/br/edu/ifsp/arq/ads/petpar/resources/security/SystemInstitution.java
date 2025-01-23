@@ -1,7 +1,6 @@
 package br.edu.ifsp.arq.ads.petpar.resources.security;
 
 import br.edu.ifsp.arq.ads.petpar.domain.entity.InstitutionEntity;
-import br.edu.ifsp.arq.ads.petpar.domain.entity.UserEntity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 

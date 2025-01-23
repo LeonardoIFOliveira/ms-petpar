@@ -29,7 +29,7 @@ public class UserController {
     }
 
     @PostMapping
-    @PreAuthorize("hasAuthority('ROLE_REGISTER_USER') and hasAuthority('SCOPE_write')")
+    //@PreAuthorize("hasAuthority('ROLE_REGISTER_USER') and hasAuthority('SCOPE_write')")
     public ResponseEntity save(@RequestBody UserDto request) throws Exception {
 
         userService.save(mapper.toEntity(request));

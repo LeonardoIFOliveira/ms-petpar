@@ -37,7 +37,7 @@ public class InstitutionController {
     }
 
     @PostMapping
-    @PreAuthorize("hasAuthority('ROLE_REGISTER_INSTITUTION') and hasAuthority('SCOPE_write')")
+    //@PreAuthorize("hasAuthority('ROLE_REGISTER_INSTITUTION') and hasAuthority('SCOPE_write')")
     public ResponseEntity save(@RequestBody InstitutionDto request) throws Exception {
         institutionFacade.save(request);
         return ResponseEntity.noContent().build();

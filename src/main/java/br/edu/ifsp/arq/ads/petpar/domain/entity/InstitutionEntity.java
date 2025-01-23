@@ -35,7 +35,7 @@ public class InstitutionEntity {
     @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
     private LocalDateTime updatedAt;
     @ManyToMany(fetch = FetchType.EAGER) // fetch = buscar - eager = ancioso
-    @JoinTable(name = "user_permission", joinColumns = @JoinColumn(name = "id_user"),
+    @JoinTable(name = "institution_permission", joinColumns = @JoinColumn(name = "id_user"),
             inverseJoinColumns = @JoinColumn(name = "id_permission"))
     private List<Permission> permissions;
 
