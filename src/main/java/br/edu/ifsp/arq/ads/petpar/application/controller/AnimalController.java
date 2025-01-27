@@ -21,7 +21,7 @@ public class AnimalController {
 
     @GetMapping("/list")
     @PreAuthorize("hasAuthority('ROLE_REGISTER_USER') and hasAuthority('SCOPE_read')")
-    public ResponseEntity<List<AnimalDto>> list(StatusAdoption statusAdoption, Integer pageNumber, Integer pageSize) throws Exception {
+    public ResponseEntity<List<AnimalDto>> list( @RequestBody  StatusAdoption statusAdoption, @RequestParam Integer pageNumber,@RequestParam Integer pageSize) throws Exception {
         var response = animalFacade.listAnimalsByStatus(pageNumber, pageSize, List.of(statusAdoption));
 
         return ResponseEntity.ok(response);
@@ -29,14 +29,14 @@ public class AnimalController {
 
     @GetMapping("/list-institution/{id}")
     @PreAuthorize("hasAuthority('ROLE_REGISTER_INSTITUTION') and hasAuthority('SCOPE_read')")
-    public ResponseEntity<List<AnimalDto>> listByInstitutionId(String institutionId, Integer pageNumber, Integer pageSize) throws Exception {
+    public ResponseEntity<List<AnimalDto>> listByInstitutionId(@RequestParam String institutionId, @RequestParam Integer pageNumber, @RequestParam Integer pageSize) throws Exception {
         var response = animalFacade.listAnimalsByInstitution(institutionId, pageNumber, pageSize);
         return ResponseEntity.ok(response);
     }
 
     @PostMapping
     @PreAuthorize("hasAuthority('ROLE_REGISTER_INSTITUTION') and hasAuthority('SCOPE_write')")
-    public ResponseEntity save(AnimalDto request) throws Exception {
+    public ResponseEntity save(@RequestBody AnimalDto request) throws Exception {
         animalFacade.save(request);
         return ResponseEntity.noContent().build();
     }
@@ -44,7 +44,7 @@ public class AnimalController {
     @Operation(description = "Seleciona animal por id")
     @GetMapping("/{id}")
     @PreAuthorize("hasRole('ROLE_SEARCH_USER') and hasAuthority('SCOPE_read')")
-    public ResponseEntity<AnimalDto> findById(Long id) throws Exception {
+    public ResponseEntity<AnimalDto> findById( @RequestParam Long id) throws Exception {
         var response = animalFacade.findOrThrowNotFound(id);
 
         return ResponseEntity.ok(response);
@@ -53,7 +53,7 @@ public class AnimalController {
     @Operation(description = "Deleta animal na base de dados")
     @PutMapping
     @PreAuthorize("hasAuthority('ROLE_REMOVE_INSTITUTION') and hasAuthority('SCOPE_write')")
-    public ResponseEntity delete(Long id) throws Exception {
+    public ResponseEntity delete( @RequestParam Long id) throws Exception {
         animalFacade.delete(id);
         return ResponseEntity.noContent().build();
     }

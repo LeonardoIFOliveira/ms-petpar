@@ -16,7 +16,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@EqualsAndHashCode
+//@EqualsAndHashCode
 public class UserEntity{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,5 +44,7 @@ public class UserEntity{
 	@JoinTable(name = "user_permission", joinColumns = @JoinColumn(name = "id_user"),
 			inverseJoinColumns = @JoinColumn(name = "id_permission"))
 	private List<Permission> permissions;
+	@NotNull
+	private Boolean active;
 
 }

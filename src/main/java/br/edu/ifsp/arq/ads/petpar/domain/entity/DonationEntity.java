@@ -28,9 +28,9 @@ public class DonationEntity{
 	private LocalDateTime createdAt;
 	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name = "institution_id", referencedColumnName = "id")
-	private InstitutionEntity institutionId;
+	private InstitutionEntity institution;
 	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name = "user_id", referencedColumnName = "id")
-	private UserEntity userId;
+	private UserEntity user;
 
 }

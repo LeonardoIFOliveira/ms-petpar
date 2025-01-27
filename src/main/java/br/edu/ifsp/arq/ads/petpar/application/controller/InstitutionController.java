@@ -3,9 +3,6 @@ package br.edu.ifsp.arq.ads.petpar.application.controller;
 import br.edu.ifsp.arq.ads.petpar.application.dto.InstitutionDto;
 import br.edu.ifsp.arq.ads.petpar.application.facade.InstitutionFacade;
 import br.edu.ifsp.arq.ads.petpar.domain.entity.enums.StatusAdoption;
-import io.swagger.v3.oas.annotations.Operation;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -43,6 +40,13 @@ public class InstitutionController {
         return ResponseEntity.noContent().build();
     }
 
+    @PutMapping
+    @PreAuthorize("hasAuthority('ROLE_REGISTER_INSTITUTION') and hasAuthority('SCOPE_write')")
+    public ResponseEntity update(@RequestBody InstitutionDto request, @RequestParam Long id) throws Exception {
+        institutionFacade.update(id, request);
+        return ResponseEntity.noContent().build();
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<InstitutionDto> findById(@PathVariable Long id) throws Exception {
         var response = institutionFacade.findOrThrowNotFound(id);
@@ -50,7 +54,7 @@ public class InstitutionController {
         return ResponseEntity.ok(response);
     }
 
-    @PutMapping
+    @DeleteMapping
     @PreAuthorize("hasAuthority('ROLE_REMOVE_INSTITUTION') and hasAuthority('SCOPE_write')")
     public ResponseEntity delete(@RequestParam  Long id) throws Exception {
         institutionFacade.delete(id);

@@ -8,7 +8,6 @@ import org.mapstruct.ReportingPolicy;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE, imports = {LocalDateTime.class})
 public interface AnimalMapper {
 
     AnimalEntity toEntity(AnimalDto animalDto);

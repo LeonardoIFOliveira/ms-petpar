@@ -2,6 +2,7 @@ package br.edu.ifsp.arq.ads.petpar.domain.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.io.Serializable;
@@ -24,7 +25,7 @@ public class InstitutionEntity {
     private String name;
     private String description;
     private String email;
-    @Column(name = "cpf_or_cnpj")
+    @Column(name = "cpf_cnpj")
     private String cpfCnpj;
     private String phoneNumber;
     private String password;
@@ -35,8 +36,10 @@ public class InstitutionEntity {
     @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
     private LocalDateTime updatedAt;
     @ManyToMany(fetch = FetchType.EAGER) // fetch = buscar - eager = ancioso
-    @JoinTable(name = "institution_permission", joinColumns = @JoinColumn(name = "id_user"),
+    @JoinTable(name = "institution_permission", joinColumns = @JoinColumn(name = "id_institution"),
             inverseJoinColumns = @JoinColumn(name = "id_permission"))
     private List<Permission> permissions;
+    @NotNull
+    private Boolean active;
 
 }

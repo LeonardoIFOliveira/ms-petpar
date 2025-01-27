@@ -1,9 +1,7 @@
 package br.edu.ifsp.arq.ads.petpar.application.facade;
 
 import br.edu.ifsp.arq.ads.petpar.application.dto.InstitutionDto;
-import br.edu.ifsp.arq.ads.petpar.domain.service.AnimalService;
 import br.edu.ifsp.arq.ads.petpar.domain.service.InstitutionService;
-import br.edu.ifsp.arq.ads.petpar.resources.mapper.AnimalMapper;
 import br.edu.ifsp.arq.ads.petpar.resources.mapper.InstitutionMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -37,5 +35,9 @@ public class InstitutionFacade {
 
     public void delete(Long id) throws Exception {
         institutionService.delete(id);
+    }
+
+    public void update(Long id, InstitutionDto request) {
+        institutionService.update(id, mapper.toEntity(request));
     }
 }

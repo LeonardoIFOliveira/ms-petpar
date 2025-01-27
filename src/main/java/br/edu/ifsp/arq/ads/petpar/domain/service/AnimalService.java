@@ -1,8 +1,10 @@
 package br.edu.ifsp.arq.ads.petpar.domain.service;
 
 import br.edu.ifsp.arq.ads.petpar.domain.entity.AnimalEntity;
+import br.edu.ifsp.arq.ads.petpar.domain.entity.UserEntity;
 import br.edu.ifsp.arq.ads.petpar.domain.entity.enums.StatusAdoption;
 import br.edu.ifsp.arq.ads.petpar.domain.repository.AnimalRepository;
+import br.edu.ifsp.arq.ads.petpar.domain.utils.PasswordEncodeUtil;
 import br.edu.ifsp.arq.ads.petpar.resources.exception.NotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +35,13 @@ public class AnimalService {
     //TODO saveOrUpdate
     public void save(AnimalEntity request) throws Exception {
         animalRepository.save(request);
+    }
+
+    public void update(Long id, AnimalEntity request) {
+        animalRepository.findById(id).ifPresentOrElse(animalEntity -> {
+            request.setId(id);
+            animalRepository.save(request);
+        }, NotFoundException::new);
     }
 
     public void delete(Long id) throws Exception {

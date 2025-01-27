@@ -16,7 +16,7 @@ public class AdoptionController {
 
     @PutMapping
     @PreAuthorize("hasAuthority('ROLE_REGISTER_USER') and hasAuthority('SCOPE_write')")
-    public ResponseEntity sendMessage(Long animalId, Long userId, StatusAdoption status) throws Exception {
+    public ResponseEntity sendMessage(@RequestParam Long animalId, @RequestParam  Long userId, @RequestParam StatusAdoption status) throws Exception {
 
         adoptionFacade.updateAdoptionStatus(userId, animalId, status);
         return ResponseEntity.noContent().build();

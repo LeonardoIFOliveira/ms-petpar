@@ -45,7 +45,7 @@ public class AnimalEntity {
     private LocalDateTime updatedAt;
     @OneToOne(cascade=CascadeType.ALL)
     @JoinColumn(name = "user_id")
-    private UserEntity userEntity;
+    private UserEntity user;
     @OneToOne(cascade=CascadeType.ALL)
     @JoinColumn(name = "institution_id")
     private InstitutionEntity institution;

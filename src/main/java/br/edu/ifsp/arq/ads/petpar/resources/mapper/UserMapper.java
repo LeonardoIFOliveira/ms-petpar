@@ -7,8 +7,8 @@ import org.mapstruct.ReportingPolicy;
 
 import java.time.LocalDateTime;
 
-@Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE, imports = {LocalDateTime.class})
-public interface  UserMapper {
+//@Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE, imports = {LocalDateTime.class, UserEntity.class, UserDto.class})
+public interface UserMapper {
 
     UserEntity toEntity(UserDto userDto);
 

@@ -1,5 +1,6 @@
 package br.edu.ifsp.arq.ads.petpar.resources.exception.handler;
 
+import br.edu.ifsp.arq.ads.petpar.resources.exception.AlreadyExistsException;
 import br.edu.ifsp.arq.ads.petpar.resources.exception.BadRequestException;
 import br.edu.ifsp.arq.ads.petpar.resources.exception.NotFoundException;
 import br.edu.ifsp.arq.ads.petpar.resources.exception.dto.ApiError;
@@ -36,6 +37,15 @@ public class RestControllerExceptionHandler extends ResponseEntityExceptionHandl
     @ResponseBody
     @ExceptionHandler(value = {BadRequestException.class})
     protected final ResponseEntity<ApiError> handleBadRequestException(BadRequestException ex) {
+
+        ApiError apiError = new ApiError(BAD_REQUEST, ex.getLocalizedMessage(), ex.getMessage());
+
+        return new ResponseEntity<>(apiError, new HttpHeaders(), apiError.getStatus());
+    }
+
+    @ResponseBody
+    @ExceptionHandler(value = {AlreadyExistsException.class})
+    protected final ResponseEntity<ApiError> handleBadRequestException(AlreadyExistsException ex) {
 
         ApiError apiError = new ApiError(BAD_REQUEST, ex.getLocalizedMessage(), ex.getMessage());
 

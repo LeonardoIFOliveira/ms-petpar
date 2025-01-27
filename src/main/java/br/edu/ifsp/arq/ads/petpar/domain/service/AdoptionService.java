@@ -24,7 +24,7 @@ public class AdoptionService {
             var user = userService.findOrThrowNotFound(userId);
             var animal= animalService.findOrThrowNotFound(animalId);
             animal.setStatusAdoption(statusAdoption);
-            animal.setUserEntity(user);
+            animal.setUser(user);
             animal.setUpdatedAt(LocalDateTime.now());
         } catch(Exception exception){
             throw exception;
@@ -36,7 +36,7 @@ public class AdoptionService {
             if(animal.getUpdatedAt().plusMonths(monthPeriod).isBefore(LocalDateTime.now())){
                 animal.setStatusAdoption(StatusAdoption.PENDING_ADOPTION);
                 animal.setUpdatedAt(LocalDateTime.now());
-                animal.setUserEntity(null);
+                animal.setUser(null);
                 try {
                     animalService.save(animal);
                 } catch (Exception exception) {
