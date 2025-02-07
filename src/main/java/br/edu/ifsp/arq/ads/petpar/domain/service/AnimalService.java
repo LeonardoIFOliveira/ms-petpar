@@ -1,5 +1,6 @@
 package br.edu.ifsp.arq.ads.petpar.domain.service;
 
+import br.edu.ifsp.arq.ads.petpar.application.dto.SpecieTypeDto;
 import br.edu.ifsp.arq.ads.petpar.domain.entity.AnimalEntity;
 import br.edu.ifsp.arq.ads.petpar.domain.entity.UserEntity;
 import br.edu.ifsp.arq.ads.petpar.domain.entity.enums.StatusAdoption;
@@ -53,8 +54,8 @@ public class AnimalService {
     public AnimalEntity findOrThrowNotFound(Long id) throws Exception {
         return animalRepository.findById(id).orElseThrow(NotFoundException::new);
     }
-    public List<AnimalEntity> listAnimalsByStatus(Integer pageNumber, Integer pageSize, List<StatusAdoption> statusAdoptions){
+    public List<AnimalEntity> listAnimalsByStatus(Integer pageNumber, Integer pageSize, List<SpecieTypeDto> statusAdoptions){
         var pageable = PageRequest.of(pageNumber,pageSize);
-        return animalRepository.findByStatusAdoptionInOrderByCreatedAtDesc(statusAdoptions,pageable);
+        return animalRepository.findByTypeInOrderByCreatedAtDesc(statusAdoptions,pageable);
     }
 }

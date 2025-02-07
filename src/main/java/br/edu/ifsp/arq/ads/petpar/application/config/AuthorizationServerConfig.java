@@ -125,6 +125,7 @@ public class AuthorizationServerConfig {
                 context.getClaims().claim("user_id", systemUser.getUser().getId());
                 context.getClaims().claim("name", systemUser.getUser().getName());
                 context.getClaims().claim("authorities", authorities);
+                //context.getClaims().claim("type", "INSTITUTION");
             }else{
                 SystemInstitution systemInstitution = (SystemInstitution) authenticationToken.getPrincipal();
                 Set<String> authorities = getAuthorities(systemInstitution);
@@ -132,6 +133,7 @@ public class AuthorizationServerConfig {
                 context.getClaims().claim("institution_id", systemInstitution.getInstitution().getId());
                 context.getClaims().claim("name", systemInstitution.getInstitution().getName());
                 context.getClaims().claim("authorities", authorities);
+                //context.getClaims().claim("type", "USER");
             }
 
         };

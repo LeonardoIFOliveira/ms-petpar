@@ -1,6 +1,7 @@
 package br.edu.ifsp.arq.ads.petpar.application.facade;
 
 import br.edu.ifsp.arq.ads.petpar.application.dto.AnimalDto;
+import br.edu.ifsp.arq.ads.petpar.application.dto.SpecieTypeDto;
 import br.edu.ifsp.arq.ads.petpar.domain.entity.AnimalEntity;
 import br.edu.ifsp.arq.ads.petpar.domain.entity.enums.StatusAdoption;
 import br.edu.ifsp.arq.ads.petpar.domain.service.AnimalService;
@@ -19,7 +20,7 @@ public class AnimalFacade {
     private final AnimalMapper mapper;
     private final AnimalService animalService;
 
-    public List<AnimalDto> listAnimalsByStatus(Integer pageNumber, Integer pageSize, List<StatusAdoption> statusAdoption) {
+    public List<AnimalDto> listAnimalsByStatus(Integer pageNumber, Integer pageSize, List<SpecieTypeDto> statusAdoption) {
         return mapper.toDataTransferObjectList(animalService
                 .listAnimalsByStatus(pageNumber, pageSize,statusAdoption));
     }

@@ -1,6 +1,7 @@
 package br.edu.ifsp.arq.ads.petpar.application.controller;
 
 import br.edu.ifsp.arq.ads.petpar.application.dto.AnimalDto;
+import br.edu.ifsp.arq.ads.petpar.application.dto.SpecieTypeDto;
 import br.edu.ifsp.arq.ads.petpar.application.facade.AnimalFacade;
 import br.edu.ifsp.arq.ads.petpar.domain.entity.enums.StatusAdoption;
 import io.swagger.v3.oas.annotations.Operation;
@@ -21,13 +22,13 @@ public class AnimalController {
 
     @GetMapping("/list")
     @PreAuthorize("hasAuthority('ROLE_REGISTER_USER') and hasAuthority('SCOPE_read')")
-    public ResponseEntity<List<AnimalDto>> list( @RequestBody  StatusAdoption statusAdoption, @RequestParam Integer pageNumber,@RequestParam Integer pageSize) throws Exception {
-        var response = animalFacade.listAnimalsByStatus(pageNumber, pageSize, List.of(statusAdoption));
+    public ResponseEntity<List<AnimalDto>> list(@RequestParam SpecieTypeDto specieTypeDto, @RequestParam Integer pageNumber, @RequestParam Integer pageSize) throws Exception {
+        var response = animalFacade.listAnimalsByStatus(pageNumber, pageSize, List.of(specieTypeDto));
 
         return ResponseEntity.ok(response);
     }
 
-    @GetMapping("/list-institution/{id}")
+    @GetMapping("/list-institution")
     @PreAuthorize("hasAuthority('ROLE_REGISTER_INSTITUTION') and hasAuthority('SCOPE_read')")
     public ResponseEntity<List<AnimalDto>> listByInstitutionId(@RequestParam String institutionId, @RequestParam Integer pageNumber, @RequestParam Integer pageSize) throws Exception {
         var response = animalFacade.listAnimalsByInstitution(institutionId, pageNumber, pageSize);
