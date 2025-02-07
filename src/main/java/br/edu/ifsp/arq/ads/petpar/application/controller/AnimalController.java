@@ -52,7 +52,7 @@ public class AnimalController {
     }
 
     @Operation(description = "Deleta animal na base de dados")
-    @PutMapping
+    @DeleteMapping
     @PreAuthorize("hasAuthority('ROLE_REMOVE_INSTITUTION') and hasAuthority('SCOPE_write')")
     public ResponseEntity delete( @RequestParam Long id) throws Exception {
         animalFacade.delete(id);
