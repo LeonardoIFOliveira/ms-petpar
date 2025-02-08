@@ -49,6 +49,7 @@ public class ResourceServerConfig {
 				httpServletResponse.sendRedirect(returnTo);
 			});
 		});
+
 		return http.formLogin(Customizer.withDefaults()).build();
 	}
 

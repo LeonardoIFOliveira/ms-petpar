@@ -24,9 +24,9 @@ public class UserEntity{
 	private String name;
 	private String email;
 	private String password;
-	@NotNull
+
 	@Column(name = "birth_date")
-	@JsonFormat(pattern = "dd/MM/yyyy")
+//	@JsonFormat(pattern = "dd/MM/yyyy")
 	private LocalDate birthDate;
 	private String cpf;
 	@Column(name = "phone_number")

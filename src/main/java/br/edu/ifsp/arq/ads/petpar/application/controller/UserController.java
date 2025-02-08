@@ -7,6 +7,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
+@CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
 @RestController
 @RequestMapping("/v1/user")
 public class UserController {
@@ -14,16 +17,22 @@ public class UserController {
     @Autowired
     private UserFacade userFacade;
 
-    @GetMapping("/login")
-    @PreAuthorize("hasRole('ROLE_SEARCH_USER') and hasAuthority('SCOPE_read')")
-    public ResponseEntity listByInstitutionId( @RequestParam String email, @RequestParam String senha) throws Exception {
-        userFacade.login(email,senha);
+    @PostMapping
+//    @PreAuthorize("hasRole('ROLE_SEARCH_USER') and hasAuthority('SCOPE_read')")
+    public ResponseEntity<?> login( @RequestBody Map<String, String> credentials) throws Exception {
+        String email = credentials.get("email");
+        String password = credentials.get("password");
+        System.out.println("Email: " + email + " | Password: " + password);
+        userFacade.login(email,password);
         return ResponseEntity.noContent().build();
     }
 
-    @PostMapping
+    //@PostMapping
+    @GetMapping
     public ResponseEntity save(@RequestBody UserDto request) throws Exception {
 
+        System.out.println("Request:");
+        System.out.println(request.toString());
         userFacade.save(request);
         return ResponseEntity.noContent().build();
     }
