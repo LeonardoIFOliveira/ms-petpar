@@ -18,21 +18,21 @@ public class InstitutionController {
     @Autowired
     private InstitutionFacade institutionFacade;
 
-    @GetMapping("/list")
-    @PreAuthorize("hasRole('ROLE_SEARCH_INSTITUTION') and hasAuthority('SCOPE_read')")
-    public ResponseEntity<List<InstitutionDto>> list( @RequestParam StatusAdoption statusAdoption,
-                                                      @RequestParam Integer pageNumber,
-                                                      @RequestParam Integer pageSize) throws Exception {
-        var response = institutionFacade.list();
-        return ResponseEntity.ok(response);
-    }
-
-    @GetMapping("/login")
-    @PreAuthorize("hasRole('ROLE_SEARCH_INSTITUTION') and hasAuthority('SCOPE_read')")
-    public ResponseEntity listByInstitutionId( @RequestParam String email, @RequestParam String senha) throws Exception {
-        institutionFacade.login(email,senha);
-        return ResponseEntity.noContent().build();
-    }
+//    @GetMapping("/list")
+////    @PreAuthorize("hasRole('ROLE_SEARCH_INSTITUTION') and hasAuthority('SCOPE_read')")
+//    public ResponseEntity<List<InstitutionDto>> list( @RequestParam StatusAdoption statusAdoption,
+//                                                      @RequestParam Integer pageNumber,
+//                                                      @RequestParam Integer pageSize) throws Exception {
+//        var response = institutionFacade.list();
+//        return ResponseEntity.ok(response);
+//    }
+//
+//    @PutMapping
+////    @PreAuthorize("hasRole('ROLE_SEARCH_INSTITUTION') and hasAuthority('SCOPE_read')")
+//    public ResponseEntity listByInstitutionId( @RequestParam String email, @RequestParam String password) throws Exception {
+//        institutionFacade.login(email,password);
+//        return ResponseEntity.noContent().build();
+//    }
 
     @PostMapping
     //@PreAuthorize("hasAuthority('ROLE_REGISTER_INSTITUTION') and hasAuthority('SCOPE_write')")
@@ -42,7 +42,7 @@ public class InstitutionController {
     }
 
     @PutMapping
-    @PreAuthorize("hasAuthority('ROLE_REGISTER_INSTITUTION') and hasAuthority('SCOPE_write')")
+//    @PreAuthorize("hasAuthority('ROLE_REGISTER_INSTITUTION') and hasAuthority('SCOPE_write')")
     public ResponseEntity update(@RequestBody InstitutionDto request, @RequestParam Long id) throws Exception {
         institutionFacade.update(id, request);
         return ResponseEntity.noContent().build();
@@ -56,7 +56,7 @@ public class InstitutionController {
     }
 
     @DeleteMapping
-    @PreAuthorize("hasAuthority('ROLE_REMOVE_INSTITUTION') and hasAuthority('SCOPE_write')")
+//    @PreAuthorize("hasAuthority('ROLE_REMOVE_INSTITUTION') and hasAuthority('SCOPE_write')")
     public ResponseEntity delete(@RequestParam  Long id) throws Exception {
         institutionFacade.delete(id);
         return ResponseEntity.noContent().build();

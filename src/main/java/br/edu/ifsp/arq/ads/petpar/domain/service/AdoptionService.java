@@ -30,20 +30,20 @@ public class AdoptionService {
             throw exception;
         }
     }
-
-    public void resetAdoptionStatus(Integer requestAmount, Integer monthPeriod) {
-        animalService.listAnimalsByStatus(1,requestAmount, List.of(StatusAdoption.PENDING_TAKE_ANIMAL)).forEach(animal ->{
-            if(animal.getUpdatedAt().plusMonths(monthPeriod).isBefore(LocalDateTime.now())){
-                animal.setStatusAdoption(StatusAdoption.PENDING_ADOPTION);
-                animal.setUpdatedAt(LocalDateTime.now());
-                animal.setUser(null);
-                try {
-                    animalService.save(animal);
-                } catch (Exception exception) {
-                    throw new RuntimeException("Erro na integração com a base");
-                }
-            }
-
-        });
-    }
+//
+//    public void resetAdoptionStatus(Integer requestAmount, Integer monthPeriod) {
+//        animalService.listAnimalsByStatus(1,requestAmount, List.of(StatusAdoption.PENDING_TAKE_ANIMAL)).forEach(animal ->{
+//            if(animal.getUpdatedAt().plusMonths(monthPeriod).isBefore(LocalDateTime.now())){
+//                animal.setStatusAdoption(StatusAdoption.PENDING_ADOPTION);
+//                animal.setUpdatedAt(LocalDateTime.now());
+//                animal.setUser(null);
+//                try {
+//                    animalService.save(animal);
+//                } catch (Exception exception) {
+//                    throw new RuntimeException("Erro na integração com a base");
+//                }
+//            }
+//
+//        });
+//    }
 }

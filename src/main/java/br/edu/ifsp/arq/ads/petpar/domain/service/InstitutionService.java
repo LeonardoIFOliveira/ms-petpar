@@ -26,7 +26,7 @@ public class InstitutionService {
 
     public InstitutionEntity login(String name, String password) throws Exception {
         String passwordEncripted = PasswordEncodeUtil.encode(password);
-        return institutionRepository.findByNameAndPassword(name,passwordEncripted)
+        return institutionRepository.findByEmailAndPassword(name,passwordEncripted)
                 .orElseThrow(NotFoundException::new);
     }
 
@@ -40,6 +40,7 @@ public class InstitutionService {
             String passwordEncripted = PasswordEncodeUtil.encode(request.getPassword());
             request.setPassword(passwordEncripted);
             request.setPermissions(addCommonUserPermissions());
+            request.setActive(true);
             institutionRepository.save(request);
         });
 

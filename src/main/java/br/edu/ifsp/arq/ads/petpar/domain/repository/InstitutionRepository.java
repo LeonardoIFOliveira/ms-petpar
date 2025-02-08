@@ -13,7 +13,7 @@ public interface InstitutionRepository extends JpaRepository<InstitutionEntity, 
 
     List<InstitutionEntity> findAllByOrderByCreatedAtAsc(Pageable pageable);
 
-    Optional<InstitutionEntity> findByNameAndPassword(String name, String password);
+    Optional<InstitutionEntity> findByEmailAndPassword(String name, String password);
     Optional<InstitutionEntity> findByEmailOrCpfCnpj(String name, String cpfOrCnpj);
 
     Optional<InstitutionEntity> findByEmail(String email);

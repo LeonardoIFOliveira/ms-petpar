@@ -2,6 +2,7 @@ package br.edu.ifsp.arq.ads.petpar.application.controller;
 
 import br.edu.ifsp.arq.ads.petpar.application.dto.AnimalDto;
 import br.edu.ifsp.arq.ads.petpar.application.facade.AnimalFacade;
+import br.edu.ifsp.arq.ads.petpar.domain.entity.enums.SpecieType;
 import br.edu.ifsp.arq.ads.petpar.domain.entity.enums.StatusAdoption;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,24 +20,24 @@ public class AnimalController {
     @Autowired
     private AnimalFacade animalFacade;
 
-
-    @GetMapping("/list")
-    @PreAuthorize("hasAuthority('ROLE_REGISTER_USER') and hasAuthority('SCOPE_read')")
-    public ResponseEntity<List<AnimalDto>> list( @RequestBody  StatusAdoption statusAdoption, @RequestParam Integer pageNumber,@RequestParam Integer pageSize) throws Exception {
-        var response = animalFacade.listAnimalsByStatus(pageNumber, pageSize, List.of(statusAdoption));
-
-        return ResponseEntity.ok(response);
-    }
-
-    @GetMapping("/list-institution/{id}")
-    @PreAuthorize("hasAuthority('ROLE_REGISTER_INSTITUTION') and hasAuthority('SCOPE_read')")
-    public ResponseEntity<List<AnimalDto>> listByInstitutionId(@RequestParam String institutionId, @RequestParam Integer pageNumber, @RequestParam Integer pageSize) throws Exception {
-        var response = animalFacade.listAnimalsByInstitution(institutionId, pageNumber, pageSize);
-        return ResponseEntity.ok(response);
-    }
+//
+//    @GetMapping("/list")
+////    @PreAuthorize("hasAuthority('ROLE_REGISTER_USER') and hasAuthority('SCOPE_read')")
+//    public ResponseEntity<List<AnimalDto>> list(@RequestBody SpecieType specie, @RequestParam Integer pageNumber, @RequestParam Integer pageSize) throws Exception {
+//        var response = animalFacade.listAnimalsByStatus(pageNumber, pageSize, List.of(specie));
+//
+//        return ResponseEntity.ok(response);
+//    }
+//
+//    @GetMapping("/list-institution/{id}")
+////    @PreAuthorize("hasAuthority('ROLE_REGISTER_INSTITUTION') and hasAuthority('SCOPE_read')")
+//    public ResponseEntity<List<AnimalDto>> listByInstitutionId(@RequestParam String institutionId, @RequestParam Integer pageNumber, @RequestParam Integer pageSize) throws Exception {
+//        var response = animalFacade.listAnimalsByInstitution(institutionId, pageNumber, pageSize);
+//        return ResponseEntity.ok(response);
+//    }
 
     @PostMapping
-    @PreAuthorize("hasAuthority('ROLE_REGISTER_INSTITUTION') and hasAuthority('SCOPE_write')")
+//    @PreAuthorize("hasAuthority('ROLE_REGISTER_INSTITUTION') and hasAuthority('SCOPE_write')")
     public ResponseEntity save(@RequestBody AnimalDto request) throws Exception {
         animalFacade.save(request);
         return ResponseEntity.noContent().build();
@@ -44,7 +45,7 @@ public class AnimalController {
 
     @Operation(description = "Seleciona animal por id")
     @GetMapping("/{id}")
-    @PreAuthorize("hasRole('ROLE_SEARCH_USER') and hasAuthority('SCOPE_read')")
+//    @PreAuthorize("hasRole('ROLE_SEARCH_USER') and hasAuthority('SCOPE_read')")
     public ResponseEntity<AnimalDto> findById( @RequestParam Long id) throws Exception {
         var response = animalFacade.findOrThrowNotFound(id);
 
@@ -53,7 +54,7 @@ public class AnimalController {
 
     @Operation(description = "Deleta animal na base de dados")
     @PutMapping
-    @PreAuthorize("hasAuthority('ROLE_REMOVE_INSTITUTION') and hasAuthority('SCOPE_write')")
+//    @PreAuthorize("hasAuthority('ROLE_REMOVE_INSTITUTION') and hasAuthority('SCOPE_write')")
     public ResponseEntity delete( @RequestParam Long id) throws Exception {
         animalFacade.delete(id);
         return ResponseEntity.noContent().build();
