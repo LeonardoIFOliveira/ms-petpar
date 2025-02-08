@@ -1,6 +1,7 @@
 package br.edu.ifsp.arq.ads.petpar.application.controller;
 
 import br.edu.ifsp.arq.ads.petpar.application.dto.InstitutionDto;
+import br.edu.ifsp.arq.ads.petpar.application.dto.LoginDto;
 import br.edu.ifsp.arq.ads.petpar.application.facade.InstitutionFacade;
 import br.edu.ifsp.arq.ads.petpar.domain.entity.enums.StatusAdoption;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,13 @@ public class InstitutionController {
 //        institutionFacade.login(email,password);
 //        return ResponseEntity.noContent().build();
 //    }
+
+    @GetMapping
+//    @PreAuthorize("hasRole('ROLE_SEARCH_USER') and hasAuthority('SCOPE_read')")
+    public ResponseEntity<LoginDto> login(@RequestParam String email, @RequestParam String password) throws Exception {
+        var login = institutionFacade.login(email,password);
+        return ResponseEntity.ok(login);
+    }
 
     @PostMapping
     //@PreAuthorize("hasAuthority('ROLE_REGISTER_INSTITUTION') and hasAuthority('SCOPE_write')")

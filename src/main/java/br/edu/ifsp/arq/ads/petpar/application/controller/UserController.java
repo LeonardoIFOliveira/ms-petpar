@@ -1,5 +1,6 @@
 package br.edu.ifsp.arq.ads.petpar.application.controller;
 
+import br.edu.ifsp.arq.ads.petpar.application.dto.LoginDto;
 import br.edu.ifsp.arq.ads.petpar.application.dto.UserDto;
 import br.edu.ifsp.arq.ads.petpar.application.facade.UserFacade;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +20,9 @@ public class UserController {
 
     @GetMapping
 //    @PreAuthorize("hasRole('ROLE_SEARCH_USER') and hasAuthority('SCOPE_read')")
-    public ResponseEntity<?> login(@RequestParam String email, @RequestParam String password) throws Exception {
-        userFacade.login(email,password);
-        return ResponseEntity.noContent().build();
+    public ResponseEntity<LoginDto> login(@RequestParam String email, @RequestParam String password) throws Exception {
+        var login = userFacade.login(email,password);
+        return ResponseEntity.ok(login);
     }
 
     //@PostMapping

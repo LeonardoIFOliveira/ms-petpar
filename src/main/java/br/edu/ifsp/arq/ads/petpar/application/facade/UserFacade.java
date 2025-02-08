@@ -1,5 +1,6 @@
 package br.edu.ifsp.arq.ads.petpar.application.facade;
 
+import br.edu.ifsp.arq.ads.petpar.application.dto.LoginDto;
 import br.edu.ifsp.arq.ads.petpar.application.dto.UserDto;
 import br.edu.ifsp.arq.ads.petpar.domain.entity.UserEntity;
 import br.edu.ifsp.arq.ads.petpar.domain.service.AnimalService;
@@ -18,8 +19,9 @@ public class UserFacade {
     private final UserMapper mapper;
     private final UserService userService;
 
-    public void login(String email, String senha) throws Exception {
-        userService.login(email,senha);
+    public LoginDto login(String email, String senha) throws Exception {
+        var user = userService.login(email,senha);
+        return LoginDto.builder().id(user.getId()).build();
     }
 
     public void save(UserDto request) throws Exception {

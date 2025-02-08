@@ -1,6 +1,7 @@
 package br.edu.ifsp.arq.ads.petpar.application.facade;
 
 import br.edu.ifsp.arq.ads.petpar.application.dto.InstitutionDto;
+import br.edu.ifsp.arq.ads.petpar.application.dto.LoginDto;
 import br.edu.ifsp.arq.ads.petpar.domain.service.InstitutionService;
 import br.edu.ifsp.arq.ads.petpar.resources.mapper.InstitutionMapper;
 import lombok.RequiredArgsConstructor;
@@ -21,8 +22,9 @@ public class InstitutionFacade {
         return mapper.toDataTransferObjectList(institutionService.list());
     }
 
-    public void login(String email, String senha) throws Exception {
-        institutionService.login(email, senha);
+    public LoginDto login(String email, String senha) throws Exception {
+        var user = institutionService.login(email,senha);
+        return LoginDto.builder().id(user.getId()).build();
     }
 
     public void save(InstitutionDto request) throws Exception {
