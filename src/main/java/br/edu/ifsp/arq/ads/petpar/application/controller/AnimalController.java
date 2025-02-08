@@ -59,4 +59,12 @@ public class AnimalController {
         animalFacade.delete(id);
         return ResponseEntity.noContent().build();
     }
+
+    @Operation(description = "Retorna todos os animais disponíveis")
+    @GetMapping("/all")
+    public ResponseEntity<List<AnimalDto>> listAllAnimals() {
+        var response = animalFacade.listAllAnimals();
+        return ResponseEntity.ok(response);
+    }
+
 }

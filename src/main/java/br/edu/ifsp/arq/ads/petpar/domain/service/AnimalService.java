@@ -58,4 +58,9 @@ public class AnimalService {
         var pageable = PageRequest.of(pageNumber,pageSize);
         return animalRepository.findByTypeInOrderByCreatedAtDesc(specie,pageable);
     }
+
+    public List<AnimalEntity> listAllAnimals() {
+        return animalRepository.findAll();
+    }
+
 }

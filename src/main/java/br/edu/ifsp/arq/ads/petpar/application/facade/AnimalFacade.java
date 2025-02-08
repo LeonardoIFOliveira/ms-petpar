@@ -41,4 +41,9 @@ public class AnimalFacade {
     public void delete(Long id) throws Exception {
         animalService.delete(id);
     }
+
+    public List<AnimalDto> listAllAnimals() {
+        return mapper.toDataTransferObjectList(animalService.listAllAnimals());
+    }
+
 }
