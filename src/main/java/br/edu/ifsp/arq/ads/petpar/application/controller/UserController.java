@@ -15,7 +15,7 @@ public class UserController {
     private UserFacade userFacade;
 
     @GetMapping("/login")
-    @PreAuthorize("hasRole('ROLE_SEARCH_USER') and hasAuthority('SCOPE_read')")
+//    @PreAuthorize("hasRole('ROLE_SEARCH_USER') and hasAuthority('SCOPE_read')")
     public ResponseEntity listByInstitutionId( @RequestParam String email, @RequestParam String senha) throws Exception {
         userFacade.login(email,senha);
         return ResponseEntity.noContent().build();
@@ -29,14 +29,14 @@ public class UserController {
     }
 
     @PutMapping
-    @PreAuthorize("hasAuthority('ROLE_REGISTER_INSTITUTION') and hasAuthority('SCOPE_write')")
+//    @PreAuthorize("hasAuthority('ROLE_REGISTER_INSTITUTION') and hasAuthority('SCOPE_write')")
     public ResponseEntity update(@RequestBody UserDto request, @RequestParam Long id) throws Exception {
         userFacade.update(id, request);
         return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasRole('ROLE_SEARCH_USER') and hasAuthority('SCOPE_read')")
+//    @PreAuthorize("hasRole('ROLE_SEARCH_USER') and hasAuthority('SCOPE_read')")
     public ResponseEntity<UserDto> findById( @PathVariable Long id) throws Exception {
         var response = userFacade.findOrThrowNotFound(id);
 
@@ -44,7 +44,7 @@ public class UserController {
     }
 
     @DeleteMapping
-    @PreAuthorize("hasAuthority('ROLE_REMOVE_USER') and hasAuthority('SCOPE_write')")
+//    @PreAuthorize("hasAuthority('ROLE_REMOVE_USER') and hasAuthority('SCOPE_write')")
     public ResponseEntity delete( @RequestParam Long id) throws Exception {
         userFacade.delete(id);
         return ResponseEntity.noContent().build();

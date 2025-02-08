@@ -20,14 +20,14 @@ public class DonationController {
     private DonationFacade donationFacade;
 
     @PostMapping
-    @PreAuthorize("hasAuthority('ROLE_REGISTER_INSTITUTION') and hasAuthority('SCOPE_write')")
+//    @PreAuthorize("hasAuthority('ROLE_REGISTER_USER') and hasAuthority('SCOPE_write')")
     public ResponseEntity save( @RequestBody DonationDto donationDto) throws Exception {
         donationFacade.save(donationDto);
         return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/list-user")
-    @PreAuthorize("hasRole('ROLE_SEARCH_USER') and hasAuthority('SCOPE_read')")
+//    @PreAuthorize("hasRole('ROLE_SEARCH_USER') and hasAuthority('SCOPE_read')")
     public ResponseEntity<List<DonationDto>> listUser( @RequestParam Long userId) throws Exception {
         var response = donationFacade.listOfUser(userId);
 
@@ -35,7 +35,7 @@ public class DonationController {
     }
 
     @GetMapping("/list-institution")
-    @PreAuthorize("hasRole('ROLE_SEARCH_INSTITUTION') and hasAuthority('SCOPE_read')")
+//    @PreAuthorize("hasRole('ROLE_SEARCH_INSTITUTION') and hasAuthority('SCOPE_read')")
     public ResponseEntity<List<DonationDto>> listInstituition(@RequestParam Long institutionId) throws Exception {
         var response = donationFacade.listOfInstitution(institutionId);
         return ResponseEntity.ok(response);
