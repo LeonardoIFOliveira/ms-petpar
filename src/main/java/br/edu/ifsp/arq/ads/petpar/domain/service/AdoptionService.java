@@ -26,6 +26,7 @@ public class AdoptionService {
             animal.setStatusAdoption(statusAdoption);
             animal.setUser(user);
             animal.setUpdatedAt(LocalDateTime.now());
+            animalService.save(animal);
         } catch(Exception exception){
             throw exception;
         }

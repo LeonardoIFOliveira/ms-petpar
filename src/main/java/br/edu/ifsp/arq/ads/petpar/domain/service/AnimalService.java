@@ -29,7 +29,7 @@ public class AnimalService {
         return animalRepository.findAllByOrderByCreatedAtAsc(pageable);
     }
 
-    public List<AnimalEntity> listAnimalsByInstitution(String institutionId,Integer pageNumber, Integer pageSize){
+    public List<AnimalEntity> listAnimalsByInstitution(Long institutionId,Integer pageNumber, Integer pageSize){
         var pageable = PageRequest.of(pageNumber,pageSize);
         return animalRepository.findByInstitutionIdOrderByCreatedAtAsc(institutionId,pageable);
     }
@@ -57,7 +57,7 @@ public class AnimalService {
     }
     public List<AnimalEntity> listAnimalsBySpecie(Integer pageNumber, Integer pageSize, List<SpecieType> specie){
         var pageable = PageRequest.of(pageNumber,pageSize);
-        return animalRepository.findByTypeInOrderByCreatedAtDesc(specie,pageable);
+        return animalRepository.findByTypeInOrderByCreatedAtDesc(specie,pageable).stream().filter( animal -> animal.getStatusAdoption().equals(StatusAdoption.PENDING_ADOPTION)).toList();
     }
 
     public List<AnimalEntity> listAllAnimals() {

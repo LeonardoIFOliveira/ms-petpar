@@ -59,7 +59,6 @@ public class AnimalMapperImpl implements AnimalMapper {
             return Collections.emptyList();
         }
         return listAnimalsByInstitution.stream()
-                .skip(listAnimalsByInstitution.size() - 1) // Pega o último elemento
                 .map(this::toDataTransferObject)
                 .toList();
     }
