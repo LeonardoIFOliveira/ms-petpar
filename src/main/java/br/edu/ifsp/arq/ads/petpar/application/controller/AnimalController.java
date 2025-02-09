@@ -7,12 +7,12 @@ import br.edu.ifsp.arq.ads.petpar.domain.entity.enums.StatusAdoption;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
+//import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
 @RestController
 @RequestMapping("/v1/animal")
 public class AnimalController {
@@ -43,16 +43,16 @@ public class AnimalController {
         return ResponseEntity.noContent().build();
     }
 
-    @Operation(description = "Seleciona animal por id")
+//    @Operation(description = "Seleciona animal por id")
     @GetMapping("/{id}")
 //    @PreAuthorize("hasRole('ROLE_SEARCH_USER') and hasAuthority('SCOPE_read')")
-    public ResponseEntity<AnimalDto> findById( @RequestParam Long id) throws Exception {
+    public ResponseEntity<AnimalDto> findById( @PathVariable Long id) throws Exception {
         var response = animalFacade.findOrThrowNotFound(id);
 
         return ResponseEntity.ok(response);
     }
 
-    @Operation(description = "Deleta animal na base de dados")
+//    @Operation(description = "Deleta animal na base de dados")
     @PutMapping
 //    @PreAuthorize("hasAuthority('ROLE_REMOVE_INSTITUTION') and hasAuthority('SCOPE_write')")
     public ResponseEntity delete( @RequestParam Long id) throws Exception {
@@ -60,7 +60,7 @@ public class AnimalController {
         return ResponseEntity.noContent().build();
     }
 
-    @Operation(description = "Retorna todos os animais disponíveis")
+//    @Operation(description = "Retorna todos os animais disponíveis")
     @GetMapping("/all")
     public ResponseEntity<List<AnimalDto>> listAllAnimals() {
         var response = animalFacade.listAllAnimals();

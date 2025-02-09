@@ -9,18 +9,18 @@ spring:
   datasource:
     url: "jdbc:mysql://localhost:3306/PetPar?createDatabaseIfNotExist=true&useSSL=false&useTimezone=true&serverTimezone=UTC&allowPublicKeyRetrieval=true"
     username: "root"
-    password: "1234"
+    password: "root"
 
   jackson:
     deserialization:
       fail-on-unknown-properties: true
-springdoc:
-  oAuthFlow:
-    authorizationUrl: http://127.0.0.1:8080/oauth2/authorize
-    tokenUrl: http://127.0.0.1:8080/oauth2/token
-  swagger-ui:
-    oauth:
-      client-id: angular
-      client-secret: '@ngul@r0'
-      use-pkce-with-authorization-code-grant: true
-      use-basic-authentication-with-access-code-grant: true
+#springdoc:
+#  oAuthFlow:
+#    authorizationUrl: http://127.0.0.1:8080/oauth2/authorize
+#    tokenUrl: http://127.0.0.1:8080/oauth2/token
+#  swagger-ui:
+#    oauth:
+#      client-id: angular
+#      client-secret: '@ngul@r0'
+#      use-pkce-with-authorization-code-grant: true
+#      use-basic-authentication-with-access-code-grant: true

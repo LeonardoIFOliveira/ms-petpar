@@ -32,6 +32,7 @@ public class AnimalEntity {
     @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate birthDate;
     @NotNull
+    @Enumerated(EnumType.STRING)
     private SpecieType type;
     @NotNull
     @Enumerated(EnumType.STRING)
@@ -43,10 +44,11 @@ public class AnimalEntity {
     @Column(name = "updated_at")
     @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
     private LocalDateTime updatedAt;
-    @OneToOne(cascade=CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "user_id")
     private UserEntity user;
-    @OneToOne(cascade=CascadeType.ALL)
+    @ManyToOne
+    @NotNull
     @JoinColumn(name = "institution_id")
     private InstitutionEntity institution;
 

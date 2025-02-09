@@ -31,7 +31,7 @@ public class AnimalFacade {
     }
 
     public void save(AnimalDto request) throws Exception {
-        animalService.save(mapper.toEntity(request));
+            animalService.save(mapper.toEntity(request));
     }
 
     public AnimalDto findOrThrowNotFound(Long id) throws Exception {

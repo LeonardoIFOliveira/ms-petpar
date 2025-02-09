@@ -16,6 +16,7 @@ import java.time.LocalDate;
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class AnimalDto {
 
+    private Long id;
     private String name;
     private String description;
     private GenderDto gender;

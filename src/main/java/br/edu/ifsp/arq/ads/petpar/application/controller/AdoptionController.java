@@ -4,7 +4,7 @@ import br.edu.ifsp.arq.ads.petpar.application.facade.AdoptionFacade;
 import br.edu.ifsp.arq.ads.petpar.domain.entity.enums.StatusAdoption;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
+//import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin(origins = "http://localhost:4200")

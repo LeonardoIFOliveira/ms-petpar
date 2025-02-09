@@ -30,8 +30,8 @@ public class AnimalMapperImpl implements AnimalMapper {
                 .gender(Gender.valueOf(animalDto.getGender().name()))
                 .type(SpecieType.valueOf(animalDto.getType().name()))
                 .statusAdoption(StatusAdoption.valueOf(animalDto.getStatusAdoption().name()))
-                .user(UserEntity.builder().id(animalDto.getUserId()).build())
-                .institution(InstitutionEntity.builder().id(animalDto.getInstitutionId()).build())
+                .user(animalDto.getUserId()==null ? null : UserEntity.builder().id(animalDto.getUserId()).build())
+                .institution(animalDto.getInstitutionId()==null ? null : InstitutionEntity.builder().id(animalDto.getInstitutionId()).build())
                 .createdAt(LocalDateTime.now())
                 .updatedAt(LocalDateTime.now())
                 .build();
@@ -41,14 +41,15 @@ public class AnimalMapperImpl implements AnimalMapper {
     public AnimalDto toDataTransferObject(AnimalEntity animalEntity) {
         return AnimalDto
                 .builder()
+                .id(animalEntity.getId())
                 .name(animalEntity.getName())
                 .description(animalEntity.getDescription())
                 .birthDate(animalEntity.getBirthDate())
                 .gender(GenderDto.valueOf(animalEntity.getGender().name()))
                 .type(SpecieTypeDto.valueOf(animalEntity.getType().name()))
                 .statusAdoption(StatusAdoptionDto.valueOf(animalEntity.getStatusAdoption().name()))
-                .userId(animalEntity.getUser().getId())
-                .institutionId(animalEntity.getInstitution().getId())
+                .userId(animalEntity.getUser()== null ? null:animalEntity.getUser().getId())
+                .institutionId(animalEntity.getInstitution()== null ? null:animalEntity.getInstitution().getId())
                 .build();
     }
 
