@@ -20,7 +20,7 @@ public class AnimalListController {
 
 
     @GetMapping
-    public ResponseEntity<List<AnimalDto>> list(@RequestBody SpecieType specie, @RequestParam Integer pageNumber, @RequestParam Integer pageSize) throws Exception {
+    public ResponseEntity<List<AnimalDto>> list(@RequestParam SpecieType specie, @RequestParam Integer pageNumber, @RequestParam Integer pageSize) throws Exception {
         var response = animalFacade.listAnimalsByStatus(pageNumber, pageSize, List.of(specie));
 
         return ResponseEntity.ok(response);

@@ -20,9 +20,9 @@ public class AnimalFacade {
     private final AnimalMapper mapper;
     private final AnimalService animalService;
 
-    public List<AnimalDto> listAnimalsByStatus(Integer pageNumber, Integer pageSize, List<SpecieType> statusAdoption) {
+    public List<AnimalDto> listAnimalsByStatus(Integer pageNumber, Integer pageSize, List<SpecieType> specieTypes) {
         return mapper.toDataTransferObjectList(animalService
-                .listAnimalsBySpecie(pageNumber, pageSize,statusAdoption));
+                .listAnimalsBySpecie(pageNumber, pageSize,specieTypes));
     }
 
     public List<AnimalDto> listAnimalsByInstitution(Long institutionId, Integer pageNumber, Integer pageSize) {

@@ -56,7 +56,7 @@ public class AnimalService {
     }
     public List<AnimalEntity> listAnimalsBySpecie(Integer pageNumber, Integer pageSize, List<SpecieType> specie){
         var pageable = PageRequest.of(pageNumber,pageSize);
-        return animalRepository.findByTypeInOrderByCreatedAtDesc(specie,pageable);
+        return animalRepository.findByTypeInOrderByCreatedAtDesc(specie,pageable).stream().filter( animal -> animal.getStatusAdoption().equals(StatusAdoption.PENDING_ADOPTION)).toList();
     }
 
     public List<AnimalEntity> listAllAnimals() {
