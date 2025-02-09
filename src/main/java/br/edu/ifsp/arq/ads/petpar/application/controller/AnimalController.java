@@ -6,10 +6,12 @@ import br.edu.ifsp.arq.ads.petpar.domain.entity.enums.SpecieType;
 import br.edu.ifsp.arq.ads.petpar.domain.entity.enums.StatusAdoption;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 //import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
@@ -66,5 +68,29 @@ public class AnimalController {
         var response = animalFacade.listAllAnimals();
         return ResponseEntity.ok(response);
     }
+
+    //@Operation(description = "Filtrar animais disponíveis para adoção")
+    @GetMapping("/filter")
+    public ResponseEntity<List<AnimalDto>> filterAnimals(
+            @RequestParam(required = false) String species,
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
+            @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
+
+        SpecieType specieEnum = null;
+        if (species != null && !species.isEmpty()) {
+            try {
+                specieEnum = SpecieType.valueOf(species.toUpperCase()); // Converte string para enum
+            } catch (IllegalArgumentException e) {
+                return ResponseEntity.badRequest().body(null); // Retorna erro se o valor for inválido
+            }
+        }
+
+        List<AnimalDto> filteredAnimals = animalFacade.filterAnimals(specieEnum, startDate, endDate);
+        return ResponseEntity.ok(filteredAnimals);
+    }
+
+
+
+
 
 }

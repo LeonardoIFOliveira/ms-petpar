@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Component
@@ -45,5 +46,10 @@ public class AnimalFacade {
     public List<AnimalDto> listAllAnimals() {
         return mapper.toDataTransferObjectList(animalService.listAllAnimals());
     }
+
+    public List<AnimalDto> filterAnimals(SpecieType species, LocalDate startDate, LocalDate endDate) {
+        return mapper.toDataTransferObjectList(animalService.filterAnimals(species, startDate, endDate));
+    }
+
 
 }

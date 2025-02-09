@@ -27,7 +27,6 @@ public class UserService {
 
     public UserEntity login(String name, String password) throws Exception {
         String passwordEncripted = PasswordEncodeUtil.encode(password);
-        System.out.println("Name: " + name + " | Password: " + password);
         return userRepository.findByEmailAndPassword(name,passwordEncripted)
                 .orElseThrow(NotFoundException::new);
     }
