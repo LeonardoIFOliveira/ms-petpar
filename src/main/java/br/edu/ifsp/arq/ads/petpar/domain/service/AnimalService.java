@@ -28,7 +28,7 @@ public class AnimalService {
         return animalRepository.findAllByOrderByCreatedAtAsc(pageable);
     }
 
-    public List<AnimalEntity> listAnimalsByInstitution(String institutionId,Integer pageNumber, Integer pageSize){
+    public List<AnimalEntity> listAnimalsByInstitution(Long institutionId,Integer pageNumber, Integer pageSize){
         var pageable = PageRequest.of(pageNumber,pageSize);
         return animalRepository.findByInstitutionIdOrderByCreatedAtAsc(institutionId,pageable);
     }

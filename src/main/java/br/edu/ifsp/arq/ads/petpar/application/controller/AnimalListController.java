@@ -26,8 +26,8 @@ public class AnimalListController {
         return ResponseEntity.ok(response);
     }
 
-    @GetMapping("/{institution_id}")
-    public ResponseEntity<List<AnimalDto>> listByInstitutionId(@PathVariable String institutionId, @RequestParam Integer pageNumber, @RequestParam Integer pageSize) throws Exception {
+    @GetMapping("/{institutionId}")
+    public ResponseEntity<List<AnimalDto>> listByInstitutionId(@PathVariable Long institutionId, @RequestParam Integer pageNumber, @RequestParam Integer pageSize) throws Exception {
         var response = animalFacade.listAnimalsByInstitution(institutionId, pageNumber, pageSize);
         return ResponseEntity.ok(response);
     }

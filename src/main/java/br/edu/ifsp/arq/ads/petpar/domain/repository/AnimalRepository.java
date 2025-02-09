@@ -16,7 +16,7 @@ public interface AnimalRepository extends JpaRepository<AnimalEntity, Long> {
     //List<AnimalEntity> findByStatusAdoptionOrderByCreatedAtAsc(StatusAdoption status, Pageable pageable);
 
 
-    List<AnimalEntity> findByInstitutionIdOrderByCreatedAtAsc(String institutionId,Pageable pageable);
+    List<AnimalEntity> findByInstitutionIdOrderByCreatedAtAsc(Long institutionId,Pageable pageable);
 
     List<AnimalEntity> findByTypeInOrderByCreatedAtDesc(List<SpecieType> specie, Pageable pageable);
 

@@ -25,7 +25,7 @@ public class AnimalFacade {
                 .listAnimalsBySpecie(pageNumber, pageSize,statusAdoption));
     }
 
-    public List<AnimalDto> listAnimalsByInstitution(String institutionId, Integer pageNumber, Integer pageSize) {
+    public List<AnimalDto> listAnimalsByInstitution(Long institutionId, Integer pageNumber, Integer pageSize) {
         return mapper.toDataTransferObjectList(
                 animalService.listAnimalsByInstitution(institutionId, pageNumber, pageSize));
     }
