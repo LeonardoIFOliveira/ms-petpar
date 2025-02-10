@@ -1,6 +1,7 @@
 package br.edu.ifsp.arq.ads.petpar.application.controller;
 
 import br.edu.ifsp.arq.ads.petpar.application.dto.DonationDto;
+import br.edu.ifsp.arq.ads.petpar.application.dto.InstitutionDto;
 import br.edu.ifsp.arq.ads.petpar.application.facade.DonationFacade;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
@@ -37,8 +38,8 @@ public class DonationController {
 
     @GetMapping("/list-institution")
 //    @PreAuthorize("hasRole('ROLE_SEARCH_INSTITUTION') and hasAuthority('SCOPE_read')")
-    public ResponseEntity<List<DonationDto>> listInstituition(@RequestParam Long institutionId) throws Exception {
-        var response = donationFacade.listOfInstitution(institutionId);
+    public ResponseEntity<List<InstitutionDto>> listInstitution() throws Exception {
+        var response = donationFacade.listOfInstitution();
         return ResponseEntity.ok(response);
     }
 

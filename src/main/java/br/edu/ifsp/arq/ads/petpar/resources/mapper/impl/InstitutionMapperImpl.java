@@ -49,7 +49,6 @@ public class InstitutionMapperImpl implements InstitutionMapper {
             return Collections.emptyList();
         }
         return institutionEntity.stream()
-                .skip(institutionEntity.size() - 1) // Pega o último elemento
                 .map(this::toDataTransferObject)
                 .toList();
     }
