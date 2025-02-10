@@ -22,4 +22,20 @@ public class AdoptionController {
         adoptionFacade.updateAdoptionStatus(userId, animalId, status);
         return ResponseEntity.noContent().build();
     }
+
+    @PutMapping("/approve")
+//    @PreAuthorize("hasAuthority('ROLE_REGISTER_USER') and hasAuthority('SCOPE_write')")
+    public ResponseEntity approve(@RequestParam Long animalId) throws Exception {
+
+        adoptionFacade.approveAdoption(animalId);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping("/reprove")
+//    @PreAuthorize("hasAuthority('ROLE_REGISTER_USER') and hasAuthority('SCOPE_write')")
+    public ResponseEntity reprove(@RequestParam Long animalId) throws Exception {
+
+        adoptionFacade.reproveAdoption(animalId);
+        return ResponseEntity.noContent().build();
+    }
 }

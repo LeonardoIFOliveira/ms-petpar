@@ -17,4 +17,12 @@ public class AdoptionFacade {
     public void updateAdoptionStatus(Long userId, Long animalId, StatusAdoption status) throws Exception {
         service.updateAdoptionStatus(userId,animalId,status);
     }
+
+    public void approveAdoption(Long animalId) throws Exception {
+        service.reproveAdoption(animalId);
+    }
+
+    public void reproveAdoption(Long animalId) throws Exception {
+        service.approveAdoption(animalId);
+    }
 }

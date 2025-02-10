@@ -31,6 +31,29 @@ public class AdoptionService {
             throw exception;
         }
     }
+
+    public void reproveAdoption(Long animalId) throws Exception {
+        try {
+            var animal= animalService.findOrThrowNotFound(animalId);
+            animal.setStatusAdoption(StatusAdoption.DONE);
+            animal.setUpdatedAt(LocalDateTime.now());
+            animalService.save(animal);
+        } catch(Exception exception){
+            throw exception;
+        }
+    }
+
+    public void approveAdoption(Long animalId) throws Exception {
+        try {
+            var animal= animalService.findOrThrowNotFound(animalId);
+            animal.setStatusAdoption(StatusAdoption.PENDING_ADOPTION);
+            animal.setUser(null);
+            animal.setUpdatedAt(LocalDateTime.now());
+            animalService.save(animal);
+        } catch(Exception exception){
+            throw exception;
+        }
+    }
 //
 //    public void resetAdoptionStatus(Integer requestAmount, Integer monthPeriod) {
 //        animalService.listAnimalsByStatus(1,requestAmount, List.of(StatusAdoption.PENDING_TAKE_ANIMAL)).forEach(animal ->{
