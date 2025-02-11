@@ -1,17 +1,16 @@
 package br.edu.ifsp.arq.ads.petpar.application.facade;
 
+import java.time.LocalDate;
+import java.util.List;
+
+import org.springframework.stereotype.Component;
+
 import br.edu.ifsp.arq.ads.petpar.application.dto.AnimalDto;
-import br.edu.ifsp.arq.ads.petpar.domain.entity.AnimalEntity;
 import br.edu.ifsp.arq.ads.petpar.domain.entity.enums.SpecieType;
-import br.edu.ifsp.arq.ads.petpar.domain.entity.enums.StatusAdoption;
 import br.edu.ifsp.arq.ads.petpar.domain.service.AnimalService;
 import br.edu.ifsp.arq.ads.petpar.resources.mapper.AnimalMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Component;
-
-import java.time.LocalDate;
-import java.util.List;
 
 @Component
 @Slf4j

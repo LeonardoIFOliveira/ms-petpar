@@ -1,18 +1,25 @@
 package br.edu.ifsp.arq.ads.petpar.application.controller;
 
-import br.edu.ifsp.arq.ads.petpar.application.dto.AnimalDto;
-import br.edu.ifsp.arq.ads.petpar.application.facade.AnimalFacade;
-import br.edu.ifsp.arq.ads.petpar.domain.entity.enums.SpecieType;
-import br.edu.ifsp.arq.ads.petpar.domain.entity.enums.StatusAdoption;
-import io.swagger.v3.oas.annotations.Operation;
+import java.time.LocalDate;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 //import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.time.LocalDate;
-import java.util.List;
+import br.edu.ifsp.arq.ads.petpar.application.dto.AnimalDto;
+import br.edu.ifsp.arq.ads.petpar.application.facade.AnimalFacade;
+import br.edu.ifsp.arq.ads.petpar.domain.entity.enums.SpecieType;
 
 @CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
 @RestController
@@ -55,9 +62,8 @@ public class AnimalController {
     }
 
 //    @Operation(description = "Deleta animal na base de dados")
-    @PutMapping
-//    @PreAuthorize("hasAuthority('ROLE_REMOVE_INSTITUTION') and hasAuthority('SCOPE_write')")
-    public ResponseEntity delete( @RequestParam Long id) throws Exception {
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) throws Exception {
         animalFacade.delete(id);
         return ResponseEntity.noContent().build();
     }
