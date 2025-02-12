@@ -22,10 +22,10 @@ public class DonationService {
     }
 
     public List<DonationEntity> listOfUser(Long userId) throws Exception {
-        return donationRepository.findByUserId(UserEntity.builder().id(userId).build());
+        return donationRepository.findByUserId(userId);
     }
 
     public List<DonationEntity> listOfInstitution(Long institutionId) throws Exception {
-        return donationRepository.findByInstitutionId(InstitutionEntity.builder().id(institutionId).build());
+        return donationRepository.findByInstitutionId(institutionId);
     }
 }

@@ -18,6 +18,7 @@ import java.time.LocalDate;
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class UserDto implements Serializable {
 
+	private Long id;
 	private String name;
 	private String email;
 	private String password;

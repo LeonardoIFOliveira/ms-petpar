@@ -22,14 +22,15 @@ public class DonationEntity{
 	private Long id;
 	private Double amount;
 	@Column(name = "payment_method")
+	@Enumerated(EnumType.STRING)
 	private PaymentMethod paymentMethod;
 	@Column(name = "created_at")
 	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
 	private LocalDateTime createdAt;
-	@OneToOne(cascade=CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name = "institution_id", referencedColumnName = "id")
 	private InstitutionEntity institution;
-	@OneToOne(cascade=CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name = "user_id", referencedColumnName = "id")
 	private UserEntity user;
 

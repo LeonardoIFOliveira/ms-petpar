@@ -39,4 +39,9 @@ public class DonationFacade {
     public void save(DonationDto donationDto) throws Exception {
         donationService.save(mapper.toEntity(donationDto));
     }
+
+    public List<DonationDto> institutionDonations(Long institutionId) throws Exception {
+        return mapper.toDataTransferObjectList(
+                donationService.listOfInstitution(institutionId));
+    }
 }

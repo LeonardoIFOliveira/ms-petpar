@@ -17,6 +17,7 @@ public class InstitutionMapperImpl implements InstitutionMapper {
     public InstitutionEntity toEntity(InstitutionDto institutionDto) {
         return InstitutionEntity
                 .builder()
+                .id(institutionDto.getId())
                 .name(institutionDto.getName())
                 .description(institutionDto.getDescription())
                 .email(institutionDto.getEmail())
@@ -33,6 +34,7 @@ public class InstitutionMapperImpl implements InstitutionMapper {
     public InstitutionDto toDataTransferObject(InstitutionEntity institutionEntity) {
         return InstitutionDto
                 .builder()
+                .id(institutionEntity.getId())
                 .name(institutionEntity.getName())
                 .description(institutionEntity.getDescription())
                 .email(institutionEntity.getEmail())

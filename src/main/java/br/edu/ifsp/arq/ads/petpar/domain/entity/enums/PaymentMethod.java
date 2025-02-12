@@ -2,7 +2,8 @@ package br.edu.ifsp.arq.ads.petpar.domain.entity.enums;
 
 public enum PaymentMethod {
     PIX("PIX"),
-    CARTAO("CARTAO");
+    CARTAO("CARTAO"),
+    UNKNOWN("");
 
     private String method;
 

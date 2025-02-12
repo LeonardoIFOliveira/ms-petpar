@@ -20,13 +20,13 @@ public class DonationMapperImpl implements DonationMapper {
 
     @Override
     public DonationEntity toEntity(DonationDto donationDto){
-
+        var paymentMethod= donationDto.getPaymentMethod();
         return DonationEntity
                 .builder()
                 .amount(donationDto.getAmount())
-                .paymentMethod(PaymentMethod.valueOf(donationDto.getPaymentMethod().name()))
-                .institution(InstitutionEntity.builder().id(donationDto.getInstitutionId()).build())
-                .user(UserEntity.builder().id(donationDto.getUserId()).build())
+                .paymentMethod(paymentMethod==null ? null : PaymentMethod.valueOf(donationDto.getPaymentMethod().name()))
+                .user(donationDto.getUserId()==null ? null : UserEntity.builder().id(donationDto.getUserId()).build())
+                .institution(donationDto.getInstitutionId()==null ? null : InstitutionEntity.builder().id(donationDto.getInstitutionId()).build())
                 .createdAt(LocalDateTime.now())
                 .build();
 
@@ -34,12 +34,13 @@ public class DonationMapperImpl implements DonationMapper {
 
     @Override
     public DonationDto toDonationDto(DonationEntity donationEntity){
+        var paymentMethod= donationEntity.getPaymentMethod();
         return DonationDto
                 .builder()
                 .amount(donationEntity.getAmount())
-                .paymentMethod(PaymentMethodDto.valueOf(donationEntity.getPaymentMethod().name()))
-                .institutionId(donationEntity.getInstitution().getId())
-                .userId(donationEntity.getUser().getId())
+                .paymentMethod(paymentMethod==null ? null : PaymentMethodDto.valueOf(paymentMethod.name()))
+                .userId(donationEntity.getUser()== null ? null:donationEntity.getUser().getId())
+                .institutionId(donationEntity.getInstitution()== null ? null:donationEntity.getInstitution().getId())
                 .build();
 
     }
@@ -50,7 +51,7 @@ public class DonationMapperImpl implements DonationMapper {
             return Collections.emptyList();
         }
         return listOfDonations.stream()
-                .skip(listOfDonations.size() - 1) // Pega o último elemento
+                //.skip(listOfDonations.size() - 1) // Pega o último elemento
                 .map(this::toDonationDto)
                 .toList();
     }

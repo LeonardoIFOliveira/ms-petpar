@@ -18,6 +18,7 @@ import java.time.LocalDate;
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class InstitutionDto {
 
+    private Long id;
     private String name;
     private String description;
     private String email;

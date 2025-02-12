@@ -36,6 +36,15 @@ public class DonationController {
         return ResponseEntity.ok(response);
     }
 
+
+    @GetMapping("/institution-donations")
+//    @PreAuthorize("hasRole('ROLE_SEARCH_USER') and hasAuthority('SCOPE_read')")
+    public ResponseEntity<List<DonationDto>> institutionDonations( @RequestParam Long institutionId) throws Exception {
+        var response = donationFacade.institutionDonations(institutionId);
+
+        return ResponseEntity.ok(response);
+    }
+
     @GetMapping("/list-institution")
 //    @PreAuthorize("hasRole('ROLE_SEARCH_INSTITUTION') and hasAuthority('SCOPE_read')")
     public ResponseEntity<List<InstitutionDto>> listInstitution() throws Exception {

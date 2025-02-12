@@ -9,8 +9,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface DonationRepository extends JpaRepository<DonationEntity, Long> {
-    List<DonationEntity> findByUserId(UserEntity userId);
 
-    List<DonationEntity> findByInstitutionId(InstitutionEntity institutionId);
+    List<DonationEntity> findByUserId(Long userId);
+
+    List<DonationEntity> findByInstitutionId(Long institutionId);
 
 }
