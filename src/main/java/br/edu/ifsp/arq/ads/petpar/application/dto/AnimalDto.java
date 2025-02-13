@@ -23,6 +23,7 @@ public class AnimalDto {
     private LocalDate birthDate;
     private SpecieTypeDto type;
     private StatusAdoptionDto statusAdoption;
+    private String photoUrl;
     private Long userId;
     private Long institutionId;
 

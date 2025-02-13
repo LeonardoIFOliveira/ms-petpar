@@ -38,6 +38,8 @@ public class AnimalEntity {
     @Enumerated(EnumType.STRING)
     @Column(name = "status_adoption")
     private StatusAdoption statusAdoption;
+    @Column(name = "photo_url")
+    private String photoUrl;
     @Column(name = "created_at")
     @JsonFormat(pattern = "dd/MM/yyyy HH:mm")
     private LocalDateTime createdAt;

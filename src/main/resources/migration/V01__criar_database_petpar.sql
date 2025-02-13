@@ -42,6 +42,7 @@ CREATE TABLE animals (
     birth_date DATE,
     type ENUM('CACHORRO', 'GATO', 'ROEDOR', 'PEIXE', 'OUTRO') NOT NULL,
     status_adoption ENUM('PENDING_ADOPTION', 'IN_PROGRESS', 'PENDING_INSTITUTION_APPROVE','PENDING_TAKE_ANIMAL', 'DONE') DEFAULT 'PENDING_ADOPTION',
+    photo_url VARCHAR(255),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP NULL,
     user_id BIGINT,
@@ -61,3 +62,6 @@ CREATE TABLE donations (
     FOREIGN KEY (institution_id) REFERENCES institutions(id),
     FOREIGN KEY (user_id) REFERENCES users(id)
 );
+
+
+ALTER TABLE animals ADD COLUMN photo_url VARCHAR(255);
